@@ -465,7 +465,7 @@
                     </svg>
                 </div>
                 <h2 class="form-title">INPUT DATA PERIFERAL</h2>
-                <p class="form-subtitle">Sistem Manajemen Perangkat Periferal Modern</p>
+                <p class="form-subtitle">Sistem Manajemen Perangkat Periferal</p>
             </div>
         </div>
 
@@ -480,12 +480,12 @@
                     <div class="section-title full">Informasi Perangkat</div>
 
                     <div class="form-group">
-                        <label class="form-label required">Nama Perangkat</label>
+                        <label class="form-label required">Nama </label>
                         <input type="text"
                                name="nama_perangkat"
                                class="form-control"
                                value="{{ old('nama_perangkat') }}"
-                               placeholder="Contoh: Printer HP LaserJet"
+                               placeholder="Contoh: Agus"
                                required>
                     </div>
 

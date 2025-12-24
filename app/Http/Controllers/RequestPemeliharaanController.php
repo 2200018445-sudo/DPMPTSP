@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 class RequestPemeliharaanController extends Controller
 {
     public function index()
-    {
-        $requestPemeliharaan = RequestPemeliharaan::latest()->get();
-        return view('pages.requestpemeliharaan', compact('requestPemeliharaan'));
-    }
+{
+    $requestPemeliharaans = RequestPemeliharaan::all();
+
+    return view('pages.riwayat', compact(
+        'requestPemeliharaan',
+        'perangkatUtama',
+        'periferal'
+    ));
+}
 
     public function create()
     {
@@ -51,5 +56,20 @@ public function edit($id)
 
     return view('pages.requestpemeliharaan', compact('item'));
 }
+
+ public function destroy($id)
+{
+        $periferal = Periferal::findOrFail($id);
+
+        // hapus foto dari storage
+        if ($periferal->foto && Storage::disk('public')->exists($periferal->foto)) {
+            Storage::disk('public')->delete($periferal->foto);
+        }
+
+        $periferal->delete();
+
+        return redirect()->back()
+            ->with('success', 'Data periferal berhasil dihapus');
+    }
 
 }

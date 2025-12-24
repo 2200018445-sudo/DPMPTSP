@@ -206,6 +206,7 @@
     .bg-warning {
         background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
         box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        color: #ffffff !important;
     }
 
     .bg-dark {
@@ -239,6 +240,7 @@
     .btn-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     }
 
     .btn-secondary {
@@ -250,6 +252,7 @@
     .btn-secondary:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(71, 85, 105, 0.5);
+        background: linear-gradient(135deg, #475569 0%, #334155 100%);
     }
 
     .btn-danger {
@@ -261,15 +264,22 @@
     .btn-danger:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
     }
 
     /* ===== MODAL ===== */
+    .modal-backdrop {
+        backdrop-filter: blur(8px);
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
     .modal-content {
         background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
         border: 2px solid rgba(239, 68, 68, 0.3);
         border-radius: 24px;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
         backdrop-filter: blur(20px);
+        overflow: hidden;
     }
 
     .modal-header {
@@ -284,12 +294,19 @@
         font-size: 20px;
         text-transform: uppercase;
         letter-spacing: 1px;
+        color: #ffffff;
     }
 
     .modal-body {
         padding: 32px;
         color: #cbd5e1;
         font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .modal-body p {
+        margin-bottom: 16px;
+        color: #e2e8f0;
     }
 
     .modal-body strong {
@@ -297,11 +314,31 @@
         font-size: 18px;
         display: block;
         margin-top: 12px;
+        font-weight: 700;
     }
 
     .modal-footer {
         border-top: 2px solid rgba(255, 255, 255, 0.1);
         padding: 24px 32px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-footer .btn {
+        min-width: 100px;
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+
+    /* Button Close Modal */
+    .btn-close {
+        filter: brightness(0) invert(1);
+        opacity: 1;
+    }
+
+    .btn-close:hover {
+        opacity: 0.8;
+        transform: rotate(90deg);
+        transition: all 0.3s ease;
     }
 
     /* ===== TEXT COLORS ===== */
@@ -339,6 +376,18 @@
         .btn {
             padding: 6px 12px;
             font-size: 11px;
+        }
+
+        .d-flex.gap-2 {
+            flex-direction: column;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
         }
     }
 </style>
@@ -399,7 +448,8 @@
                                                class="btn btn-secondary btn-sm">
                                                 Edit
                                             </a>
-                                            <button class="btn btn-danger btn-sm"
+                                            <button type="button"
+                                                    class="btn btn-danger btn-sm"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#hapusModal{{ $item->id }}">
                                                 Hapus
@@ -411,41 +461,9 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                {{-- MODAL HAPUS --}}
-                                <div class="modal fade" id="hapusModal{{ $item->id }}" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger text-white">
-                                                <h5 class="modal-title">Konfirmasi Hapus</h5>
-                                                <button type="button"
-                                                        class="btn-close btn-close-white"
-                                                        data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <p>Yakin ingin menghapus data perangkat utama ini?</p>
-                                                <strong>{{ $item->nama_perangkat }}</strong>
-                                            </div>
-                                            <div class="modal-footer justify-content-center">
-                                                <button class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Batal
-                                                </button>
-                                                <form action="{{ route('perangkatutama.destroy', $item->id) }}"
-                                                      method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Ya, Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             @empty
                                 <tr>
-                                    <td colspan="10" class="text-center text-muted py-4">
+                                    <td colspan="8" class="text-center text-muted py-4">
                                         Data perangkat utama belum tersedia
                                     </td>
                                 </tr>
@@ -515,42 +533,6 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                {{-- MODAL HAPUS --}}
-                                <div class="modal fade" id="hapusPeriferal{{ $item->id }}" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger text-white">
-                                                <h5 class="modal-title">Konfirmasi Hapus</h5>
-                                                <button type="button"
-                                                        class="btn-close btn-close-white"
-                                                        data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <div class="modal-body text-center">
-                                                <p>Yakin ingin menghapus data periferal ini?</p>
-                                                <strong>{{ $item->nama_perangkat }}</strong>
-                                            </div>
-
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="button"
-                                                        class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">
-                                                    Batal
-                                                </button>
-
-                                                <form action="{{ route('periferal.destroy', $item->id) }}"
-                                                      method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Ya, Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             @empty
                                 <tr>
                                     <td colspan="8" class="text-center text-muted py-4">
@@ -580,8 +562,8 @@
                                 <th>No</th>
                                 <th>User Aduan</th>
                                 <th>Kerusakan</th>
-                                <th>Tanggal Aduan</th>
-                                <th>Tanggal Penanganan</th>
+                                
+                                
                                 <th>Petugas</th>
                                 <th>Tindakan</th>
                                 <th>Status</th>
@@ -595,19 +577,21 @@
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->user_aduan }}</td>
                                     <td>{{ $item->kerusakan }}</td>
-                                    <td>{{ $item->tanggal_aduan }}</td>
-                                    <td>{{ $item->tanggal_penanganan ?? '-' }}</td>
+                                    
+                                    
                                     <td>{{ $item->nama_penanganan ?? '-' }}</td>
                                     <td>{{ $item->tindakan ?? '-' }}</td>
                                     <td class="text-center">
-                                        <span class="badge {{ $item->status === 'Selesai' ? 'bg-success' : 'bg-warning text-dark' }}">
+                                        <span class="badge {{ $item->status === 'Selesai' ? 'bg-success' : 'bg-warning' }}">
                                             {{ $item->status }}
                                         </span>
                                     </td>
+                                     {{-- AKSI --}}
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
+
                                             <a href="{{ route('requestpemeliharaan.edit', $item->id) }}"
-                                               class="btn btn-secondary btn-sm">
+                                            class="btn btn-secondary btn-sm">
                                                 Edit
                                             </a>
 
@@ -617,49 +601,18 @@
                                                     data-bs-target="#hapusPemeliharaan{{ $item->id }}">
                                                 Hapus
                                             </button>
+
+                                            <a href="{{ route('requestpemeliharaan.show', $item->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                                Detail
+                                            </a>
+
                                         </div>
                                     </td>
                                 </tr>
-
-                                {{-- MODAL HAPUS PEMELIHARAAN --}}
-                                <div class="modal fade" id="hapusPemeliharaan{{ $item->id }}" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger text-white">
-                                                <h5 class="modal-title">Konfirmasi Hapus</h5>
-                                                <button type="button"
-                                                        class="btn-close btn-close-white"
-                                                        data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <div class="modal-body text-center">
-                                                <p>Yakin ingin menghapus data pemeliharaan ini?</p>
-                                                <strong>{{ $item->kerusakan }}</strong>
-                                            </div>
-
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="button"
-                                                        class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">
-                                                    Batal
-                                                </button>
-
-                                                <form action="{{ route('requestpemeliharaan.destroy', $item->id) }}"
-                                                      method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Ya, Hapus
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center text-muted py-4">
+                                    <td colspan="7" class="text-center text-muted py-4">
                                         Data request pemeliharaan belum tersedia
                                     </td>
                                 </tr>
@@ -672,5 +625,132 @@
 
     </div>
 </div>
+
+{{-- ========================================= --}}
+{{-- MODAL HAPUS PERANGKAT UTAMA (LUAR TABEL) --}}
+{{-- ========================================= --}}
+@foreach ($perangkatUtamas as $item)
+<div class="modal fade" id="hapusModal{{ $item->id }}" tabindex="-1" aria-labelledby="hapusModalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hapusModalLabel{{ $item->id }}">
+                    ⚠️ Konfirmasi Hapus
+                </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Apakah Anda yakin ingin menghapus data perangkat utama ini?</p>
+                <strong>{{ $item->nama_perangkat }}</strong>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Batal
+                </button>
+                <form action="{{ route('perangkatutama.destroy', $item->id) }}"
+                      method="POST"
+                      style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        Ya, Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+{{-- ===================================== --}}
+{{-- MODAL HAPUS PERIFERAL (LUAR TABEL) --}}
+{{-- ===================================== --}}
+@foreach ($periferals as $item)
+<div class="modal fade" id="hapusPeriferal{{ $item->id }}" tabindex="-1" aria-labelledby="hapusPeriferalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hapusPeriferalLabel{{ $item->id }}">
+                    ⚠️ Konfirmasi Hapus
+                </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>Apakah Anda yakin ingin menghapus data periferal ini?</p>
+                <strong>{{ $item->jenis_perangkat }} - {{ $item->merk }}</strong>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Batal
+                </button>
+
+                <form action="{{ route('periferal.destroy', $item->id) }}"
+                      method="POST"
+                      style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        Ya, Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+{{-- ========================================== --}}
+{{-- MODAL HAPUS PEMELIHARAAN (LUAR TABEL) --}}
+{{-- ========================================== --}}
+@foreach ($requestPemeliharaans as $item)
+<div class="modal fade" id="hapusPemeliharaan{{ $item->id }}" tabindex="-1" aria-labelledby="hapusPemeliharaanLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hapusPemeliharaanLabel{{ $item->id }}">
+                    ⚠️ Konfirmasi Hapus
+                </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>Apakah Anda yakin ingin menghapus data pemeliharaan ini?</p>
+                <strong>{{ $item->kerusakan }}</strong>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Batal
+                </button>
+
+                <form action="{{ route('requestpemeliharaan.destroy', $item->id) }}"
+                      method="POST"
+                      style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        Ya, Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 @endsection
