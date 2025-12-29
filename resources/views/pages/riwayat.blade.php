@@ -420,7 +420,7 @@
                                 <th>Nama</th>
                                 <th>Nama Perangkat</th>
                                 <th>Posisi</th>
-                                <th>Jenis OS</th>
+                                
                                 <th>Status</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
@@ -434,7 +434,7 @@
                                     <td>{{ $item->nama_perangkat }}</td>
                                     <td>{{ $item->jenis_perangkat }}</td>
                                     <td>{{ $item->posisi }}</td>
-                                    <td>{{ $item->os }}</td>
+                                    
                 
                                     <td class="text-center">
                                         <span class="badge {{ $item->status === 'OK' ? 'bg-success' : 'bg-danger' }}">
@@ -463,7 +463,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center text-muted py-4">
+                                    <td colspan="7" class="text-center text-muted py-4">
                                         Data perangkat utama belum tersedia
                                     </td>
                                 </tr>

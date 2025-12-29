@@ -111,17 +111,20 @@
     .peripheral-image-container {
         position: relative;
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 48px 32px;
+        padding: 60px 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        min-height: 320px;
     }
 
     .peripheral-image {
-        max-height: 220px;
+        max-height: 300px;
         max-width: 100%;
+        width: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        padding: 0 20px;
     }
 
     .peripheral-header {
@@ -245,6 +248,15 @@
     @media (max-width: 576px) {
         .peripheral-card {
             border-radius: 16px;
+        }
+
+        .peripheral-image-container {
+            min-height: 280px;
+            padding: 50px 0;
+        }
+
+        .peripheral-image {
+            max-height: 250px;
         }
 
         .peripheral-header,

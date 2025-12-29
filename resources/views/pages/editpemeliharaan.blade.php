@@ -207,6 +207,25 @@
         filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
 
+    .edit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        padding: 10px 24px;
+        border-radius: 100px;
+        color: #92400e;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 24px;
+        box-shadow: 
+            0 4px 12px rgba(245, 158, 11, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(245, 158, 11, 0.2);
+    }
+
     .form-title {
         font-weight: 900;
         font-size: 38px;
@@ -530,14 +549,18 @@
     <div class="form-wrapper">
         <div class="form-header">
             <div class="header-content">
+                <div class="edit-badge">
+                    <span>✏️</span>
+                    <span>Edit Mode</span>
+                </div>
                 <div class="icon-container">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.7 6.3C15.1 5.9 15.7 5.9 16.1 6.3L17.7 7.9C18.1 8.3 18.1 8.9 17.7 9.3L9 18H6V15L14.7 6.3Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12.5 7.5L16.5 11.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h2 class="form-title">Pemeliharaan Perangkat</h2>
-                <p class="form-subtitle">Sistem Manajemen Maintenance IT</p>
+                <h2 class="form-title">Edit Pemeliharaan Perangkat</h2>
+                <p class="form-subtitle">Update Data Maintenance IT</p>
             </div>
         </div>
 
@@ -562,8 +585,9 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('request.pemeliharaan.store') }}">
+            <form method="POST" action="{{ route('requestpemeliharaan.update', $requestPemeliharaan->id) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="form-grid">
                     <!-- Section: Informasi Aduan -->
@@ -575,7 +599,7 @@
                     <div class="form-group">
                         <label class="form-label required">Tanggal Aduan</label>
                         <input type="date" name="tanggal_aduan" class="form-control"
-                               value="{{ old('tanggal_aduan') }}" required>
+                               value="{{ old('tanggal_aduan', $requestPemeliharaan->tanggal_aduan) }}" required>
                     </div>
 
                     <!-- User Aduan -->
@@ -583,7 +607,7 @@
                         <label class="form-label required">User Aduan</label>
                         <input type="text" name="user_aduan" class="form-control"
                                placeholder="Nama pengadu / ruangan"
-                               value="{{ old('user_aduan') }}" required>
+                               value="{{ old('user_aduan', $requestPemeliharaan->user_aduan) }}" required>
                     </div>
 
                     <!-- Kerusakan -->
@@ -591,7 +615,7 @@
                         <label class="form-label required">Jenis Kerusakan</label>
                         <input type="text" name="kerusakan" class="form-control"
                                placeholder="Masukkan jenis kerusakan yang dilaporkan"
-                               value="{{ old('kerusakan') }}" required>
+                               value="{{ old('kerusakan', $requestPemeliharaan->kerusakan) }}" required>
                     </div>
 
                     <!-- Section: Informasi Penanganan -->
@@ -603,7 +627,7 @@
                     <div class="form-group">
                         <label class="form-label">Tanggal Penanganan</label>
                         <input type="date" name="tanggal_penanganan" class="form-control"
-                               value="{{ old('tanggal_penanganan') }}">
+                               value="{{ old('tanggal_penanganan', $requestPemeliharaan->tanggal_penanganan) }}">
                     </div>
 
                     <!-- Nama Penanganan -->
@@ -611,17 +635,17 @@
                         <label class="form-label">Nama Penanganan</label>
                         <input type="text" name="nama_penanganan" class="form-control"
                                placeholder="Teknisi / petugas yang menangani"
-                               value="{{ old('nama_penanganan') }}">
+                               value="{{ old('nama_penanganan', $requestPemeliharaan->nama_penanganan) }}">
                     </div>
 
                     <!-- Status -->
                     <div class="form-group">
                         <label class="form-label">Status Tindakan</label>
                         <select name="status" class="form-select">
-                            <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>
+                            <option value="Pending" {{ old('status', $requestPemeliharaan->status) == 'Pending' ? 'selected' : '' }}>
                                 Pending
                             </option>
-                            <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>
+                            <option value="Selesai" {{ old('status', $requestPemeliharaan->status) == 'Selesai' ? 'selected' : '' }}>
                                 Selesai
                             </option>
                         </select>
@@ -631,13 +655,13 @@
                     <div class="form-group full-width">
                         <label class="form-label">Tindakan yang Dilakukan</label>
                         <textarea name="tindakan" class="form-control" rows="3"
-                                  placeholder="Jelaskan tindakan yang dilakukan untuk menangani masalah...">{{ old('tindakan') }}</textarea>
+                                  placeholder="Jelaskan tindakan yang dilakukan untuk menangani masalah...">{{ old('tindakan', $requestPemeliharaan->tindakan) }}</textarea>
                     </div>
 
                     <!-- Buttons -->
                     <div class="button-group full-width">
-                        <a href="/" class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                        <a href="{{ route('request.pemeliharaan') }}" class="btn btn-secondary">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Update Data</button>
                     </div>
                 </div>
             </form>

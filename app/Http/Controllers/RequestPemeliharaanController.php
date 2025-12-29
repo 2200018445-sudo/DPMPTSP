@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 
 class RequestPemeliharaanController extends Controller
 {
-    public function index()
+    
+    
+public function index()
 {
     $requestPemeliharaans = RequestPemeliharaan::all();
-
-    return view('pages.riwayat', compact(
-        'requestPemeliharaan',
-        'perangkatUtama',
-        'periferal'
-    ));
+    return view('pages.requestpemeliharaan', compact('requestPemeliharaans'));
 }
+
 
     public function create()
     {
@@ -52,24 +50,44 @@ class RequestPemeliharaanController extends Controller
 
 public function edit($id)
 {
-    $item = RequestPemeliharaan::findOrFail($id);
-
-    return view('pages.requestpemeliharaan', compact('item'));
+    $requestPemeliharaan = RequestPemeliharaan::findOrFail($id);
+    return view('pages.editpemeliharaan', compact('requestPemeliharaan'));
 }
 
  public function destroy($id)
 {
-        $periferal = Periferal::findOrFail($id);
+    $item = RequestPemeliharaan::findOrFail($id);
+    $item->delete();
 
-        // hapus foto dari storage
-        if ($periferal->foto && Storage::disk('public')->exists($periferal->foto)) {
-            Storage::disk('public')->delete($periferal->foto);
-        }
+    return redirect()->back()->with('success','Data Pemeliharaan berhasil dihapus');
+}
 
-        $periferal->delete();
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'tanggal_aduan'        => 'required|date',
+        'kerusakan'            => 'required|string',
+        'user_aduan'           => 'required|string',
+        'tanggal_penanganan'   => 'nullable|date',
+        'nama_penanganan'      => 'nullable|string',
+        'tindakan'             => 'nullable|string',
+        'status'               => 'required|string',
+    ]);
 
-        return redirect()->back()
-            ->with('success', 'Data periferal berhasil dihapus');
+    $pemeliharaan = RequestPemeliharaan::findOrFail($id);
+
+    $pemeliharaan->update($request->all());
+
+    return redirect()
+        ->route('riwayat')
+        ->with('success', 'Data pemeliharaan berhasil diperbarui');
+}
+
+public function show($id)
+    {
+        $pemeliharaan = RequestPemeliharaan::findOrFail($id);
+        return view('pages.detailpemeliharaan', compact('pemeliharaan'));
     }
+
 
 }

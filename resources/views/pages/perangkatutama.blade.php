@@ -3,20 +3,20 @@
 @section('konten')
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     * {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
-        background: #0a0e27;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         position: relative;
         overflow-x: hidden;
     }
 
-    /* Animated mesh gradient background */
+    /* Animated Background Patterns */
     body::before {
         content: '';
         position: fixed;
@@ -24,116 +24,83 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: 
-            radial-gradient(circle at 10% 20%, rgba(255, 107, 107, 0.2) 0%, transparent 40%),
-            radial-gradient(circle at 90% 30%, rgba(255, 168, 76, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at 50% 80%, rgba(255, 195, 113, 0.2) 0%, transparent 40%),
-            radial-gradient(circle at 70% 60%, rgba(255, 107, 107, 0.1) 0%, transparent 40%);
-        animation: meshMove 20s ease-in-out infinite;
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+        animation: bgFloat 15s ease-in-out infinite;
         pointer-events: none;
     }
 
-    @keyframes meshMove {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33% { transform: translate(30px, -30px) scale(1.1); }
-        66% { transform: translate(-20px, 20px) scale(0.9); }
+    @keyframes bgFloat {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(30px, -30px); }
     }
 
     .container-wrapper {
         position: relative;
         z-index: 1;
-        padding: 70px 20px;
-        max-width: 1500px;
+        padding: 50px 20px;
+        max-width: 1400px;
         margin: 0 auto;
     }
 
     .form-wrapper {
-        background: linear-gradient(145deg, #1a1f3a 0%, #0f1423 100%);
-        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 32px;
         overflow: hidden;
         box-shadow: 
-            0 0 0 1px rgba(255, 107, 107, 0.2),
-            0 50px 100px rgba(0, 0, 0, 0.5),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03);
-        animation: slideInScale 1s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
+            0 30px 90px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.5);
+        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes slideInScale {
+    @keyframes slideUp {
         from {
             opacity: 0;
-            transform: translateY(80px) scale(0.85);
+            transform: translateY(60px);
         }
         to {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
     }
 
-    /* Glowing border effect */
-    .form-wrapper::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(45deg, #ff6b6b, #ffa84c, #ffc371, #ff6b6b);
-        border-radius: 40px;
-        z-index: -1;
-        opacity: 0.5;
-        filter: blur(20px);
-        animation: borderGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes borderGlow {
-        0%, 100% { opacity: 0.3; }
-        50% { opacity: 0.6; }
-    }
-
+    /* Premium Gradient Header */
     .form-header {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffa84c 50%, #ffc371 100%);
-        padding: 70px 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        padding: 60px 50px;
         position: relative;
         overflow: hidden;
     }
 
-    /* Animated geometric shapes */
-    .geo-shape {
+    /* Floating Orbs in Header */
+    .header-orb {
         position: absolute;
-        opacity: 0.1;
-        animation: rotateShape 25s linear infinite;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        animation: floatOrb 20s ease-in-out infinite;
     }
 
-    .shape-1 {
+    .orb-1 {
         width: 300px;
         height: 300px;
-        top: -100px;
-        right: -50px;
-        background: linear-gradient(45deg, transparent 30%, white 30%, white 70%, transparent 70%);
-        transform: rotate(45deg);
+        top: -150px;
+        right: -100px;
     }
 
-    .shape-2 {
+    .orb-2 {
         width: 200px;
         height: 200px;
-        bottom: -50px;
+        bottom: -80px;
         left: 10%;
-        border: 40px solid white;
-        border-radius: 50%;
-        animation-delay: -5s;
+        animation-delay: 5s;
     }
 
-    .shape-3 {
-        width: 150px;
-        height: 150px;
-        top: 50%;
-        left: -30px;
-        background: white;
-        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        animation-delay: -10s;
-    }
-
-    @keyframes rotateShape {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    @keyframes floatOrb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(20px, -30px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
     .header-content {
@@ -146,12 +113,12 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(20px);
         padding: 10px 24px;
-        border-radius: 30px;
-        margin-bottom: 24px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 50px;
+        margin-bottom: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
     }
 
     .badge-dot {
@@ -160,213 +127,226 @@
         background: white;
         border-radius: 50%;
         animation: pulse 2s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     @keyframes pulse {
         0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.5; transform: scale(1.3); }
+        50% { opacity: 0.7; transform: scale(1.3); }
     }
 
     .badge-text {
         color: white;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
     }
 
     .form-title {
-        font-weight: 800;
-        font-size: 56px;
+        font-weight: 900;
+        font-size: 48px;
         color: white;
-        margin-bottom: 16px;
-        letter-spacing: -2px;
-        text-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        margin-bottom: 12px;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         line-height: 1.1;
     }
 
     .form-subtitle {
         color: rgba(255, 255, 255, 0.95);
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
         letter-spacing: 0.5px;
     }
 
     .form-body {
-        padding: 70px 60px;
-        position: relative;
+        padding: 60px 50px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     }
 
     .form-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
+        gap: 28px;
     }
 
     .full { 
         grid-column: span 3; 
     }
 
+    /* Modern Section Title */
     .section-title {
         font-weight: 800;
-        font-size: 26px;
-        color: #ff6b6b;
-        margin: 45px 0 28px 0;
-        padding: 20px 28px;
-        background: linear-gradient(90deg, rgba(255, 107, 107, 0.15) 0%, transparent 100%);
+        font-size: 24px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 40px 0 24px 0;
+        padding: 18px 24px;
+        background-color: #f1f5f9;
         border-radius: 16px;
-        border-left: 6px solid #ff6b6b;
+        border-left: 5px solid #667eea;
         position: relative;
         text-transform: uppercase;
         letter-spacing: 1px;
-        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.1);
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
     }
 
-    .section-title::after {
+    .section-title::before {
         content: '';
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
-        width: 6px;
-        background: linear-gradient(180deg, #ff6b6b 0%, #ffa84c 100%);
-        animation: slideDown 2s ease-in-out infinite;
+        width: 5px;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        animation: slideUpDown 3s ease-in-out infinite;
     }
 
-    @keyframes slideDown {
+    @keyframes slideUpDown {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(10px); }
+        50% { transform: translateY(15px); }
     }
 
     .form-label {
-        color: #cbd5e1;
+        color: #475569;
         font-size: 13px;
         font-weight: 700;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         display: block;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 1px;
     }
 
     .form-label.required::after {
         content: '*';
-        color: #ff6b6b;
-        margin-left: 6px;
+        color: #ef4444;
+        margin-left: 4px;
         font-size: 16px;
     }
 
+    /* Modern Input Styles */
     .form-control, .form-select {
-        background: rgba(255, 255, 255, 0.95);
-        border: 2px solid rgba(255, 107, 107, 0.3);
-        border-radius: 16px;
-        padding: 16px 22px;
-        font-size: 16px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 14px 18px;
+        font-size: 15px;
         color: #1e293b;
         width: 100%;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
     }
 
     .form-control:focus, .form-select:focus {
-        background: #ffffff;
-        border-color: #ff6b6b;
+        background: white;
+        border-color: #667eea;
         box-shadow: 
-            0 0 0 4px rgba(255, 107, 107, 0.15),
-            0 12px 32px rgba(255, 107, 107, 0.25);
+            0 0 0 4px rgba(102, 126, 234, 0.15),
+            0 8px 20px rgba(102, 126, 234, 0.2);
         outline: none;
         transform: translateY(-2px);
     }
 
     .form-control:hover:not(:focus), 
     .form-select:hover:not(:focus) {
-        border-color: rgba(255, 107, 107, 0.4);
+        border-color: #cbd5e1;
         transform: translateY(-1px);
     }
 
     .form-control::placeholder {
-        color: #64748b;
+        color: #94a3b8;
         font-weight: 400;
     }
 
     textarea.form-control {
         resize: vertical;
-        min-height: 110px;
+        min-height: 100px;
         font-family: inherit;
     }
 
+    /* File Input Styling */
     input[type="file"].form-control {
-        padding: 14px 22px;
+        padding: 12px 18px;
         cursor: pointer;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     }
 
     input[type="file"].form-control::file-selector-button {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffa84c 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         border: none;
-        padding: 10px 28px;
+        padding: 10px 24px;
         border-radius: 10px;
         font-weight: 700;
         text-transform: uppercase;
         font-size: 12px;
         letter-spacing: 1px;
-        margin-right: 16px;
+        margin-right: 14px;
         cursor: pointer;
-        transition: all 0.3s;
-        box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
     input[type="file"].form-control::file-selector-button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 24px rgba(255, 107, 107, 0.4);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
 
     small {
-        color: #ffa84c;
-        font-size: 13px;
+        color: #f59e0b;
+        font-size: 12px;
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 10px;
+        gap: 6px;
+        margin-top: 8px;
         font-weight: 600;
     }
 
     small::before {
         content: '⚠️';
-        font-size: 16px;
+        font-size: 14px;
     }
 
+    /* Custom Select Arrow */
     .form-select {
         appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23ff6b6b' d='M13.354 5.646a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708 0l-5-5a.5.5 0 1 1 .708-.708L8 10.293l4.646-4.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23667eea' d='M13.354 5.646a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708 0l-5-5a.5.5 0 1 1 .708-.708L8 10.293l4.646-4.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 22px center;
-        padding-right: 55px;
+        background-position: right 18px center;
+        padding-right: 50px;
         cursor: pointer;
     }
 
+    /* Modern Button Group */
     .button-group {
         display: flex;
         justify-content: center;
-        gap: 20px;
-        margin-top: 70px;
-        padding-top: 50px;
-        border-top: 2px solid rgba(255, 107, 107, 0.15);
+        gap: 16px;
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 2px solid #e2e8f0;
     }
 
     .btn {
-        padding: 20px 60px;
-        border-radius: 16px;
+        padding: 16px 48px;
+        border-radius: 14px;
         font-weight: 800;
-        font-size: 16px;
+        font-size: 15px;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 1.5px;
         border: none;
         cursor: pointer;
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-block;
     }
 
+    /* Ripple Effect */
     .btn::before {
         content: '';
         position: absolute;
@@ -375,54 +355,73 @@
         width: 0;
         height: 0;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.4);
         transform: translate(-50%, -50%);
-        transition: width 0.8s, height 0.8s;
+        transition: width 0.6s, height 0.6s;
     }
 
     .btn:active::before {
-        width: 500px;
-        height: 500px;
+        width: 400px;
+        height: 400px;
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffa84c 50%, #ffc371 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         box-shadow: 
-            0 12px 36px rgba(255, 107, 107, 0.45),
-            inset 0 -3px 12px rgba(0, 0, 0, 0.2);
+            0 10px 30px rgba(102, 126, 234, 0.4),
+            inset 0 -2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .btn-primary:hover {
-        transform: translateY(-4px);
+        transform: translateY(-3px);
         box-shadow: 
-            0 18px 48px rgba(255, 107, 107, 0.55),
-            inset 0 -3px 12px rgba(0, 0, 0, 0.2);
+            0 15px 40px rgba(102, 126, 234, 0.5),
+            inset 0 -2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .btn-secondary {
-        background: rgba(71, 85, 105, 0.4);
-        color: #e2e8f0;
-        border: 2px solid rgba(255, 107, 107, 0.3);
-        backdrop-filter: blur(10px);
+        background: white;
+        color: #475569;
+        border: 2px solid #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .btn-secondary:hover {
-        background: rgba(71, 85, 105, 0.6);
-        border-color: rgba(255, 107, 107, 0.5);
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(255, 107, 107, 0.2);
+        background: #f8fafc;
+        border-color: #cbd5e1;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
 
-    /* Sparkle effect */
-    @keyframes sparkle {
-        0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-        50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    /* Form Group Animation */
+    .form-group {
+        animation: fadeInUp 0.6s ease both;
     }
 
+    .form-group:nth-child(1) { animation-delay: 0.05s; }
+    .form-group:nth-child(2) { animation-delay: 0.1s; }
+    .form-group:nth-child(3) { animation-delay: 0.15s; }
+    .form-group:nth-child(4) { animation-delay: 0.2s; }
+    .form-group:nth-child(5) { animation-delay: 0.25s; }
+    .form-group:nth-child(6) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
     @media (max-width: 992px) {
         .form-grid { 
             grid-template-columns: repeat(2, 1fr); 
+            gap: 24px;
         }
         .full { 
             grid-column: span 2; 
@@ -431,45 +430,89 @@
             padding: 50px 40px;
         }
         .form-header {
-            padding: 60px 40px;
+            padding: 50px 40px;
         }
         .form-title {
-            font-size: 42px;
+            font-size: 40px;
         }
     }
 
     @media (max-width: 576px) {
         .form-grid { 
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 20px;
         }
         .full { 
             grid-column: span 1; 
         }
         .form-body {
-            padding: 40px 28px;
+            padding: 40px 24px;
         }
         .form-header {
-            padding: 50px 28px;
+            padding: 40px 24px;
         }
         .form-title {
-            font-size: 36px;
+            font-size: 32px;
+        }
+        .form-subtitle {
+            font-size: 16px;
         }
         .button-group {
             flex-direction: column;
+            gap: 12px;
         }
         .btn {
             width: 100%;
         }
+        .section-title {
+            font-size: 20px;
+        }
     }
+
+    /* Floating Particle Decoration */
+    .particle {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: floatParticle 15s infinite ease-in-out;
+        z-index: 0;
+    }
+
+    @keyframes floatParticle {
+        0%, 100% { 
+            opacity: 0;
+            transform: translateY(0) translateX(0);
+        }
+        10%, 90% { 
+            opacity: 1;
+        }
+        50% { 
+            transform: translateY(-100vh) translateX(50px);
+        }
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 30%; animation-delay: 3s; }
+    .particle:nth-child(3) { left: 50%; animation-delay: 6s; }
+    .particle:nth-child(4) { left: 70%; animation-delay: 9s; }
+    .particle:nth-child(5) { left: 90%; animation-delay: 12s; }
 </style>
+
+<!-- Floating Particles -->
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
 
 <div class="container-wrapper">
     <div class="form-wrapper">
         <div class="form-header">
-            <div class="geo-shape shape-1"></div>
-            <div class="geo-shape shape-2"></div>
-            <div class="geo-shape shape-3"></div>
+            <div class="header-orb orb-1"></div>
+            <div class="header-orb orb-2"></div>
 
             <div class="header-content">
                 <div class="badge-container">
@@ -482,7 +525,6 @@
         </div>
 
         <div class="form-body">
-            {{-- ⚠️ enctype wajib --}}
             <form action="{{ route('perangkatutama.store') }}" 
                   method="POST" 
                   enctype="multipart/form-data">

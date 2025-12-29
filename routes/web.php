@@ -51,6 +51,10 @@ Route::get('/request-pemeliharaan', [RequestPemeliharaanController::class, 'inde
     ->name('request.pemeliharaan');
 Route::post('/request-pemeliharaan', [RequestPemeliharaanController::class, 'store'])
     ->name('request.pemeliharaan.store');
+Route::get('/requestpemeliharaan/{id}/edit', [RequestPemeliharaanController::class, 'edit'])
+    ->name('requestpemeliharaan.edit');
+Route::get('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'show'])
+    ->name('requestpemeliharaan.show');
 
 /* =====================
    RIWAYAT
