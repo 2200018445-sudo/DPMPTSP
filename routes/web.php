@@ -55,6 +55,8 @@ Route::get('/requestpemeliharaan/{id}/edit', [RequestPemeliharaanController::cla
     ->name('requestpemeliharaan.edit');
 Route::get('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'show'])
     ->name('requestpemeliharaan.show');
+Route::delete('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'destroy'])
+    ->name('request.pemeliharaan.destroy');
 
 /* =====================
    RIWAYAT
@@ -65,6 +67,3 @@ Route::get('/riwayat', [RiwayatController::class, 'index'])
 /* =====================
    RESOURCE ROUTE (opsional, jika ingin CRUD otomatis)
 ===================== */
-Route::resource('perangkatutama', PerangkatUtamaController::class);
-Route::resource('periferal', PeriferalController::class);
-Route::resource('requestpemeliharaan', RequestPemeliharaanController::class);

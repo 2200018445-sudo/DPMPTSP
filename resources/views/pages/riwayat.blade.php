@@ -738,7 +738,7 @@
                     Batal
                 </button>
 
-                <form action="{{ route('requestpemeliharaan.destroy', $item->id) }}"
+                <form action="{{ route('request.pemeliharaan.destroy', $item->id) }}"
                       method="POST"
                       style="display: inline;">
                     @csrf
