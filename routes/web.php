@@ -57,7 +57,8 @@ Route::get('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, '
     ->name('requestpemeliharaan.show');
 Route::delete('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'destroy'])
     ->name('request.pemeliharaan.destroy');
-
+Route::put('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'update'])
+    ->name('requestpemeliharaan.update');
 /* =====================
    RIWAYAT
 ===================== */

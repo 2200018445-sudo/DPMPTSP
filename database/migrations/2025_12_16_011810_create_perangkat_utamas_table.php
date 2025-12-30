@@ -20,13 +20,13 @@ return new class extends Migration
     $table->string('os_status')->nullable();
 
     $table->string('ram_merk');
-    $table->integer('ram_kapasitas');
+    $table->string('ram_kapasitas', 10)->change();
 
     $table->string('ssd_merk')->nullable();
-    $table->integer('ssd_kapasitas')->nullable();
+    $table->string('ssd_kapasitas', 10)->change();
 
     $table->string('hdd_merk')->nullable();
-    $table->integer('hdd_kapasitas')->nullable();
+    $table->string('hdd_kapasitas', 10)->change();
 
     $table->string('office_nama')->nullable();
     $table->string('office_status')->nullable();

@@ -585,9 +585,9 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('requestpemeliharaan.update', $requestPemeliharaan->id) }}">
-                @csrf
-                @method('PUT')
+            <form action="{{ route('requestpemeliharaan.update', $requestPemeliharaan->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
                 <div class="form-grid">
                     <!-- Section: Informasi Aduan -->
