@@ -3,7 +3,7 @@
 @section('konten')
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
+        <div class="col-12 col-xl-10">
 
             <div class="peripheral-card">
 
@@ -38,44 +38,81 @@
                     </div>
                 </div>
 
-                {{-- DETAIL --}}
+                {{-- DETAIL TABLE --}}
                 <div class="peripheral-details">
+                    <div class="table-responsive">
+                        <table class="detail-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                        </svg>
+                                        <span>ID Periferal</span>
+                                    </th>
+                                    <th>
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11z"/>
+                                        </svg>
+                                        <span>Merk</span>
+                                    </th>
+                                    <th>
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                                        </svg>
+                                        <span>Tipe</span>
+                                    </th>
+                                    <th>
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                        </svg>
+                                        <span>Posisi</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $periferal->id_perangkat }}</td>
+                                    <td>{{ $periferal->merk ?? '-' }}</td>
+                                    <td>{{ $periferal->tipe ?? '-' }}</td>
+                                    <td>{{ $periferal->posisi ?? '-' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    @php
-                        $details = [
-                            ['icon' => '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>', 'label' => 'ID Periferal', 'value' => $periferal->id_perangkat],
-                            ['icon' => '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11z"/></svg>', 'label' => 'Merk', 'value' => $periferal->merk ?? '-'],
-                            ['icon' => '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/></svg>', 'label' => 'Tipe', 'value' => $periferal->tipe ?? '-'],
-                            ['icon' => '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>', 'label' => 'Posisi', 'value' => $periferal->posisi ?? '-'],
-                            ['icon' => '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>', 'label' => 'Pengguna', 'value' => $periferal->pengguna ?? '-'],
-                        ];
-                    @endphp
-
-                    @foreach($details as $item)
-                        <div class="detail-item">
-                            <div class="detail-icon">{!! $item['icon'] !!}</div>
-                            <div class="detail-content">
-                                <span class="detail-label">{{ $item['label'] }}</span>
-                                <span class="detail-value">{{ $item['value'] }}</span>
-                            </div>
-                        </div>
-                    @endforeach
-
-                    @if($periferal->keterangan)
-                        <div class="detail-item keterangan-item">
-                            <div class="detail-icon">
-                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                                </svg>
-                            </div>
-                            <div class="detail-content">
-                                <span class="detail-label">Keterangan</span>
-                                <span class="detail-value">{{ $periferal->keterangan }}</span>
-                            </div>
-                        </div>
-                    @endif
-
+                    <div class="table-responsive mt-3">
+                        <table class="detail-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                            <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                        </svg>
+                                        <span>Pengguna</span>
+                                    </th>
+                                    @if($periferal->keterangan)
+                                    <th colspan="3">
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                        </svg>
+                                        <span>Keterangan</span>
+                                    </th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $periferal->pengguna ?? '-' }}</td>
+                                    @if($periferal->keterangan)
+                                    <td colspan="3" class="keterangan-cell">{{ $periferal->keterangan }}</td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 {{-- FOOTER --}}
@@ -110,7 +147,7 @@
 
     .peripheral-image-container {
         position: relative;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
         padding: 60px 0;
         display: flex;
         align-items: center;
@@ -149,82 +186,93 @@
     }
 
     .peripheral-details {
-        padding: 8px 32px 32px;
+        padding: 32px;
     }
 
-    .detail-item {
-        display: flex;
-        align-items: flex-start;
-        padding: 16px 0;
-        border-bottom: 1px solid #f8fafc;
+    .table-responsive {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+    }
+
+    .detail-table thead tr {
+        background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    }
+
+    .detail-table th {
+        padding: 16px 20px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .detail-table th:last-child {
+        border-right: none;
+    }
+
+    .detail-table th svg {
+        vertical-align: middle;
+        margin-right: 6px;
+        opacity: 0.9;
+    }
+
+    .detail-table th span {
+        vertical-align: middle;
+    }
+
+    .detail-table tbody tr {
+        border-bottom: 1px solid #f1f5f9;
         transition: all 0.2s ease;
     }
 
-    .detail-item:hover {
-        background: #f8fafc;
-        margin: 0 -32px;
-        padding: 16px 32px;
-        border-radius: 8px;
+    .detail-table tbody tr:hover {
+        background: #eff6ff;
     }
 
-    .detail-item:last-child {
+    .detail-table tbody tr:last-child {
         border-bottom: none;
     }
 
-    .detail-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        margin-right: 16px;
-    }
-
-    .detail-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        min-width: 0;
-    }
-
-    .detail-label {
-        font-size: 12px;
-        font-weight: 600;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .detail-value {
-        font-size: 15px;
+    .detail-table td {
+        padding: 18px 20px;
+        font-size: 14px;
         font-weight: 500;
         color: #334155;
-        word-wrap: break-word;
-        line-height: 1.5;
+        border-right: 1px solid #f1f5f9;
     }
 
-    .keterangan-item .detail-value {
+    .detail-table td:last-child {
+        border-right: none;
+    }
+
+    .keterangan-cell {
         font-style: italic;
         color: #64748b;
     }
 
     .peripheral-footer {
         padding: 0 32px 32px;
+        display: flex;
+        justify-content: flex-start;
     }
 
     .btn-back {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        width: 100%;
-        padding: 16px 24px;
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 14px 28px;
+        background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
         color: white;
         border: none;
         border-radius: 14px;
@@ -232,12 +280,12 @@
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 14px rgba(240, 147, 251, 0.3);
+        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
     }
 
     .btn-back:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+        box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
         color: white;
     }
 
@@ -245,7 +293,26 @@
         transform: translateY(0);
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 992px) {
+        .detail-table {
+            font-size: 13px;
+        }
+
+        .detail-table th,
+        .detail-table td {
+            padding: 14px 16px;
+        }
+
+        .detail-table th {
+            font-size: 11px;
+        }
+
+        .detail-table td {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 768px) {
         .peripheral-card {
             border-radius: 16px;
         }
@@ -262,17 +329,41 @@
         .peripheral-header,
         .peripheral-details,
         .peripheral-footer {
-            padding-left: 24px;
-            padding-right: 24px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        .detail-item:hover {
-            margin: 0 -24px;
-            padding: 16px 24px;
+        .peripheral-details {
+            padding-top: 24px;
+            padding-bottom: 24px;
         }
 
         .peripheral-name {
             font-size: 20px;
+        }
+
+        .detail-table th,
+        .detail-table td {
+            padding: 12px 12px;
+        }
+
+        .detail-table th {
+            font-size: 10px;
+        }
+
+        .detail-table td {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .detail-table {
+            min-width: 600px;
         }
     }
 </style>

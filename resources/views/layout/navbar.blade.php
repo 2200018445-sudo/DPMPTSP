@@ -257,7 +257,8 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('riwayat') }}">Riwayat</a>
         </li>
-
+        <nav class="navbar navbar-light bg-light">
+  
       </ul>
       
     </div>

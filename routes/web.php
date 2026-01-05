@@ -6,6 +6,7 @@ use App\Http\Controllers\PeriferalController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\RequestPemeliharaanController;
 
+
 /* =====================
    HALAMAN UMUM
 ===================== */
@@ -66,5 +67,5 @@ Route::get('/riwayat', [RiwayatController::class, 'index'])
     ->name('riwayat');
 
 /* =====================
-   RESOURCE ROUTE (opsional, jika ingin CRUD otomatis)
+   
 ===================== */
