@@ -66,6 +66,4 @@ Route::put('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, '
 Route::get('/riwayat', [RiwayatController::class, 'index'])
     ->name('riwayat');
 
-/* =====================
-   
-===================== */
+

@@ -49,7 +49,7 @@
                                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                                         </svg>
-                                        <span>ID Perangkat</span>
+                                        <span>ID Pegawai</span>
                                     </th>
                                     <th>
                                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -160,7 +160,7 @@
                                                 <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="me-1">
                                                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                                                 </svg>
-                                                Berfungsi Normal
+                                                Normal
                                             @else
                                                 <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="me-1">
                                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>

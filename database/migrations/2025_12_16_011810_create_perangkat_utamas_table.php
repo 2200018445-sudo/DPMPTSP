@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('perangkat_utamas', function (Blueprint $table) {
-    $table->id();
+     $table->id();
     $table->string('nama_perangkat');
     $table->string('jenis_perangkat');
     $table->string('id_perangkat');
@@ -20,13 +20,13 @@ return new class extends Migration
     $table->string('os_status')->nullable();
 
     $table->string('ram_merk');
-    $table->string('ram_kapasitas', 10)->change();
+    $table->string('ram_kapasitas', 10);
 
     $table->string('ssd_merk')->nullable();
-    $table->string('ssd_kapasitas', 10)->change();
+    $table->string('ssd_kapasitas', 10);
 
     $table->string('hdd_merk')->nullable();
-    $table->string('hdd_kapasitas', 10)->change();
+    $table->string('hdd_kapasitas', 10);
 
     $table->string('office_nama')->nullable();
     $table->string('office_status')->nullable();
@@ -37,7 +37,6 @@ return new class extends Migration
     $table->string('status');
     $table->text('keterangan')->nullable();
     $table->string('foto')->nullable();
-
 
     $table->timestamps();
 });
