@@ -595,6 +595,16 @@
                         <h3 class="section-title">Informasi Aduan</h3>
                     </div>
 
+                    <!-- Jenis Perangkat -->
+                    <div class="form-group">
+                        <label class="form-label required">Jenis Perangkat</label>
+                        <select name="jenis_perangkat" class="form-select" required>
+                            <option disabled selected>Pilih jenis perangkat</option>
+                            <option>Perangkat Utama</option>
+                            <option>Periferal</option>
+                        </select>
+                    </div>
+
                     <!-- Tanggal Aduan -->
                     <div class="form-group">
                         <label class="form-label required">Tanggal Aduan</label>

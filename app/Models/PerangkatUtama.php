@@ -9,6 +9,7 @@ class PerangkatUtama extends Model
 {
     protected $fillable = [
         'nama_perangkat',
+        'nama_pengguna',
         'jenis_perangkat',
         'id_perangkat',
         'os',

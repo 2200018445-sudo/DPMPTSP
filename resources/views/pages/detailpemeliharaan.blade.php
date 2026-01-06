@@ -74,6 +74,15 @@
 
                     <div class="info-item mb-4">
                         <label class="text-muted small mb-2 text-uppercase fw-semibold">
+                            <i class="bi bi-journal-text me-1"></i>Jenis Perangkat
+                        </label>
+                        <div class="info-content-box">
+                            <p class="mb-0 lh-lg">{{ $pemeliharaan->jenis_perangkat }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item mb-4">
+                        <label class="text-muted small mb-2 text-uppercase fw-semibold">
                             <i class="bi bi-journal-text me-1"></i>Deskripsi Kerusakan
                         </label>
                         <div class="info-content-box">

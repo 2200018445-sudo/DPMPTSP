@@ -554,7 +554,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label required">ID Pegawai</label>
+                        <label class="form-label required">ID Perangkat</label>
                         <input type="text" name="id_perangkat" class="form-control" placeholder="Contoh: EMP001" required>
                     </div>
 

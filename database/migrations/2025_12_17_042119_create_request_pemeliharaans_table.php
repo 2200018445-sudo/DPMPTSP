@@ -11,6 +11,7 @@ return new class extends Migration
     Schema::create('request_pemeliharaans', function (Blueprint $table) {
         $table->id();
         $table->date('tanggal_aduan');
+        $table->string('jenis_perangkat');
         $table->string('kerusakan');
         $table->string('user_aduan');
         $table->date('tanggal_penanganan')->nullable();

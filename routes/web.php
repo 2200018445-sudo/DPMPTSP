@@ -60,10 +60,13 @@ Route::delete('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class
     ->name('request.pemeliharaan.destroy');
 Route::put('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, 'update'])
     ->name('requestpemeliharaan.update');
+
 /* =====================
    RIWAYAT
 ===================== */
 Route::get('/riwayat', [RiwayatController::class, 'index'])
     ->name('riwayat');
 
-
+// Route untuk menampilkan riwayat pemeliharaan berdasarkan perangkat
+Route::get('/perangkat/{id}/riwayat-pemeliharaan', [RequestPemeliharaanController::class, 'riwayatPerangkat'])
+    ->name('perangkat.riwayat');

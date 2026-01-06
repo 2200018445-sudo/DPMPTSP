@@ -419,11 +419,10 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Nama Perangkat</th>
-                                <th>Posisi</th>
-                                
                                 <th>Status</th>
                                 <th>Keterangan</th>
-                                <th>Aksi</th>
+                                <th style="text-align:center; vertical-align:middle;">Aksi</th>
+
                             </tr>
                         </thead>
 
@@ -433,7 +432,7 @@
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_perangkat }}</td>
                                     <td>{{ $item->jenis_perangkat }}</td>
-                                    <td>{{ $item->posisi }}</td>
+                                    
                                     
                 
                                     <td class="text-center">
@@ -444,6 +443,10 @@
                                     <td>{{ $item->keterangan ?? '-' }}</td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
+                                            {{-- Pemeliharaan --}}
+                                            <a href="{{ route('perangkat.riwayat', $item->id) }}" class="btn btn-warning">
+    <i class="bi bi-tools me-1"></i>PEMELIHARAAN
+</a>
                                             <a href="{{ route('perangkatutama.edit', $item->id) }}"
                                                class="btn btn-secondary btn-sm">
                                                 Edit
@@ -490,11 +493,12 @@
                                 <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Perangkat</th>
-                                <th>Merk</th>
+                                
                                 <th>Tipe</th>
                                 <th>Posisi</th>
                                 <th>Pengguna</th>
-                                <th>Aksi</th>
+                                <th style="text-align:center; vertical-align:middle;">Aksi</th>
+
                             </tr>
                         </thead>
 
@@ -508,7 +512,7 @@
                                             {{ $item->jenis_perangkat }}
                                         </span>
                                     </td>
-                                    <td>{{ $item->merk }}</td>
+                                    
                                     <td>{{ $item->tipe }}</td>
                                     <td>{{ $item->posisi }}</td>
                                     <td>{{ $item->pengguna }}</td>
@@ -516,6 +520,10 @@
                                     {{-- AKSI --}}
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
+                                            {{-- Pemeliharaan --}}
+                                            <a href="{{ route('perangkat.riwayat', $item->id) }}" class="btn btn-warning">
+    <i class="bi bi-tools me-1"></i>PEMELIHARAAN
+</a>
                                             <a href="{{ route('periferal.edit', $item->id) }}"
                                                class="btn btn-secondary btn-sm">
                                                 Edit

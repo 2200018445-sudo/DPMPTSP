@@ -271,6 +271,30 @@
         font-size: 20px;
     }
 
+    .alert-warning {
+        background: rgba(251, 191, 36, 0.12);
+        color: #92400e;
+        border-color: rgba(245, 158, 11, 0.3);
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .alert-warning::before {
+        content: '⚠';
+        font-size: 20px;
+        color: #f59e0b;
+    }
+
+    .alert-warning a {
+        color: #f59e0b;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    .alert-warning a:hover {
+        color: #d97706;
+    }
+
     /* 2 Column Layout */
     .form-grid {
         display: grid;
@@ -343,6 +367,13 @@
         font-weight: 400;
     }
 
+    .form-control:disabled,
+    .form-select:disabled {
+        background: #f5f5f4;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
     /* Date input styling */
     .form-control[type="date"] {
         color: #1c1917;
@@ -377,6 +408,13 @@
         background: #ffffff;
         color: #1c1917;
         padding: 12px;
+    }
+
+    .form-select optgroup {
+        font-weight: 700;
+        color: #f59e0b;
+        font-size: 14px;
+        padding: 8px 0;
     }
 
     .button-group {
@@ -433,12 +471,18 @@
             inset 0 2px 0 rgba(255, 255, 255, 0.3);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
         transform: translateY(-3px);
         box-shadow: 
             0 16px 40px rgba(245, 158, 11, 0.45),
             0 8px 20px rgba(251, 191, 36, 0.25),
             inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
     }
 
     .btn-secondary {
@@ -562,6 +606,24 @@
                 </div>
             @endif
 
+            @php
+                $perangkatUtamaCount = isset($perangkatUtama) ? $perangkatUtama->count() : 0;
+                $perangkatPeriferalCount = isset($perangkatPeriferal) ? $perangkatPeriferal->count() : 0;
+                $totalPerangkat = $perangkatUtamaCount + $perangkatPeriferalCount;
+            @endphp
+
+            {{-- Alert jika tidak ada data perangkat --}}
+            @if($totalPerangkat == 0)
+                <div class="alert alert-warning">
+                    <div>
+                        <strong>⚠ Tidak Ada Data Perangkat!</strong><br>
+                        Belum ada data perangkat yang tersedia. Silakan tambahkan data perangkat terlebih dahulu di menu:<br>
+                        • <a href="{{ route('perangkatutama') }}">Perangkat Utama</a><br>
+                        • <a href="{{ route('periferal.index') }}">Periferal</a>
+                    </div>
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('request.pemeliharaan.store') }}">
                 @csrf
 
@@ -571,11 +633,45 @@
                         <h3 class="section-title">Informasi Aduan</h3>
                     </div>
 
+                    <!-- Jenis Perangkat -->
+                    <div class="form-group">
+                        <label class="form-label required">Jenis Perangkat</label>
+                        @if($totalPerangkat > 0)
+                            <select name="jenis_perangkat" class="form-select" required>
+                                <option value="" disabled selected>Pilih jenis perangkat</option>
+                                
+                                @if($perangkatUtamaCount > 0)
+                                    <optgroup label="━━━ PERANGKAT UTAMA ━━━">
+                                        @foreach($perangkatUtama as $item)
+                                            <option value="{{ $item->nama_perangkat }}">
+                                                {{ $item->nama_perangkat }} / {{ $item->jenis_perangkat }}
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
+                                @endif
+
+                                @if($perangkatPeriferalCount > 0)
+                                    <optgroup label="━━━ PERANGKAT PERIFERAL ━━━">
+                                        @foreach($perangkatPeriferal as $item)
+                                            <option value="{{ $item->nama_perangkat }}">
+                                                {{ $item->nama_perangkat }} / {{ $item->jenis_perangkat }} 
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
+                                @endif
+                            </select>
+                        @else
+                            <input type="text" class="form-control" value="Tidak ada data perangkat tersedia" disabled>
+                            <input type="hidden" name="jenis_perangkat" value="">
+                        @endif
+                    </div>
+
                     <!-- Tanggal Aduan -->
                     <div class="form-group">
                         <label class="form-label required">Tanggal Aduan</label>
                         <input type="date" name="tanggal_aduan" class="form-control"
-                               value="{{ old('tanggal_aduan') }}" required>
+                               value="{{ old('tanggal_aduan') }}" 
+                               {{ $totalPerangkat == 0 ? 'disabled' : 'required' }}>
                     </div>
 
                     <!-- User Aduan -->
@@ -583,7 +679,8 @@
                         <label class="form-label required">User Aduan</label>
                         <input type="text" name="user_aduan" class="form-control"
                                placeholder="Nama pengadu / ruangan"
-                               value="{{ old('user_aduan') }}" required>
+                               value="{{ old('user_aduan') }}" 
+                               {{ $totalPerangkat == 0 ? 'disabled' : 'required' }}>
                     </div>
 
                     <!-- Kerusakan -->
@@ -591,7 +688,8 @@
                         <label class="form-label required">Jenis Kerusakan</label>
                         <input type="text" name="kerusakan" class="form-control"
                                placeholder="Masukkan jenis kerusakan yang dilaporkan"
-                               value="{{ old('kerusakan') }}" required>
+                               value="{{ old('kerusakan') }}" 
+                               {{ $totalPerangkat == 0 ? 'disabled' : 'required' }}>
                     </div>
 
                     <!-- Section: Informasi Penanganan -->
@@ -603,7 +701,8 @@
                     <div class="form-group">
                         <label class="form-label">Tanggal Penanganan</label>
                         <input type="date" name="tanggal_penanganan" class="form-control"
-                               value="{{ old('tanggal_penanganan') }}">
+                               value="{{ old('tanggal_penanganan') }}"
+                               {{ $totalPerangkat == 0 ? 'disabled' : '' }}>
                     </div>
 
                     <!-- Nama Penanganan -->
@@ -611,13 +710,14 @@
                         <label class="form-label">Nama Penanganan</label>
                         <input type="text" name="nama_penanganan" class="form-control"
                                placeholder="Teknisi / petugas yang menangani"
-                               value="{{ old('nama_penanganan') }}">
+                               value="{{ old('nama_penanganan') }}"
+                               {{ $totalPerangkat == 0 ? 'disabled' : '' }}>
                     </div>
 
                     <!-- Status -->
                     <div class="form-group">
                         <label class="form-label">Status Tindakan</label>
-                        <select name="status" class="form-select">
+                        <select name="status" class="form-select" {{ $totalPerangkat == 0 ? 'disabled' : '' }}>
                             <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>
                                 Pending
                             </option>
@@ -631,13 +731,16 @@
                     <div class="form-group full-width">
                         <label class="form-label">Tindakan yang Dilakukan</label>
                         <textarea name="tindakan" class="form-control" rows="3"
-                                  placeholder="Jelaskan tindakan yang dilakukan untuk menangani masalah...">{{ old('tindakan') }}</textarea>
+                                  placeholder="Jelaskan tindakan yang dilakukan untuk menangani masalah..."
+                                  {{ $totalPerangkat == 0 ? 'disabled' : '' }}>{{ old('tindakan') }}</textarea>
                     </div>
 
                     <!-- Buttons -->
                     <div class="button-group full-width">
                         <a href="/" class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                        <button type="submit" class="btn btn-primary" {{ $totalPerangkat == 0 ? 'disabled' : '' }}>
+                            Simpan Data
+                        </button>
                     </div>
                 </div>
             </form>

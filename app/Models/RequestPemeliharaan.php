@@ -13,6 +13,7 @@ class RequestPemeliharaan extends Model
 
     protected $fillable = [
         'tanggal_aduan',
+        'jenis_perangkat',
         'kerusakan',
         'user_aduan',
         'tanggal_penanganan',
