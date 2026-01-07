@@ -598,11 +598,7 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
 
-                                            <a href="{{ route('requestpemeliharaan.edit', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">
-                                                Edit
-                                            </a>
-
+                                            
                                             <button type="button"
                                                     class="btn btn-danger btn-sm"
                                                     data-bs-toggle="modal"

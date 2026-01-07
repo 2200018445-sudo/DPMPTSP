@@ -93,7 +93,7 @@
                                 <th>Status</th>
                                 <th>Petugas</th>
                                 <th>Tanggal Selesai</th>
-                                <th class="text-center" style="width: 120px;">Aksi</th>
+                                <th class="text-center" style="width: 180px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,8 +153,12 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('requestpemeliharaan.show', $item->id) }}" 
-                                       class="btn btn-sm btn-detail-custom">
+                                       class="btn btn-sm btn-detail-custom me-1">
                                         <i class="bi bi-eye me-1"></i>Detail
+                                    </a>
+                                    <a href="{{ route('requestpemeliharaan.edit', $item->id) }}" 
+                                       class="btn btn-sm btn-edit-custom">
+                                        <i class="bi bi-pencil-square me-1"></i>Edit
                                     </a>
                                 </td>
                             </tr>
@@ -212,16 +216,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Action Button -->
-    <div class="mt-4">
-        <a href="{{ route('riwayat') }}" class="btn btn-light-custom px-4 py-3">
-            <i class="bi bi-arrow-left-circle me-2"></i>Kembali
-        </a>
-    </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-4">
+            <a href="{{ route('riwayat') }}" class="btn btn-light-custom px-4 py-3">
+                <i class="bi bi-arrow-left-circle me-2"></i>Kembali
+            </a>
         </div>
     @endif
-
-    
 </div>
 
 <style>
@@ -343,6 +346,23 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(77, 171, 247, 0.4);
         color: white;
+    }
+
+    /* Button Edit */
+    .btn-edit-custom {
+        background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
+        color: #495057;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-edit-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(250, 176, 5, 0.4);
+        color: #495057;
     }
 
     /* Empty State */

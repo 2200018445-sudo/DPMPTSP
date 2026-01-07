@@ -635,10 +635,10 @@
 
                     <!-- Jenis Perangkat -->
                     <div class="form-group">
-                        <label class="form-label required">Jenis Perangkat</label>
+                        <label class="form-label required">Nama Perangkat</label>
                         @if($totalPerangkat > 0)
                             <select name="jenis_perangkat" class="form-select" required>
-                                <option value="" disabled selected>Pilih jenis perangkat</option>
+                                <option value="" disabled selected>Pilih perangkat</option>
                                 
                                 @if($perangkatUtamaCount > 0)
                                     <optgroup label="━━━ PERANGKAT UTAMA ━━━">

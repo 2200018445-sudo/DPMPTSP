@@ -398,6 +398,13 @@
         padding: 12px;
     }
 
+    .form-select optgroup {
+        font-weight: 700;
+        color: #f59e0b;
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
     .button-group {
         display: flex;
         gap: 16px;
@@ -586,8 +593,8 @@
             @endif
 
             <form action="{{ route('requestpemeliharaan.update', $requestPemeliharaan->id) }}" method="POST">
-    @csrf
-    @method('PUT')
+                @csrf
+                @method('PUT')
 
                 <div class="form-grid">
                     <!-- Section: Informasi Aduan -->
@@ -599,9 +606,29 @@
                     <div class="form-group">
                         <label class="form-label required">Jenis Perangkat</label>
                         <select name="jenis_perangkat" class="form-select" required>
-                            <option disabled selected>Pilih jenis perangkat</option>
-                            <option>Perangkat Utama</option>
-                            <option>Periferal</option>
+                            <option value="" disabled>Pilih jenis perangkat</option>
+                            
+                            @if(isset($perangkatUtama) && $perangkatUtama->count() > 0)
+                                <optgroup label="━━━ PERANGKAT UTAMA ━━━">
+                                    @foreach($perangkatUtama as $item)
+                                        <option value="{{ $item->nama_perangkat }}" 
+                                            {{ old('jenis_perangkat', $requestPemeliharaan->jenis_perangkat) == $item->nama_perangkat ? 'selected' : '' }}>
+                                            {{ $item->nama_perangkat }} / {{ $item->jenis_perangkat }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
+
+                            @if(isset($perangkatPeriferal) && $perangkatPeriferal->count() > 0)
+                                <optgroup label="━━━ PERANGKAT PERIFERAL ━━━">
+                                    @foreach($perangkatPeriferal as $item)
+                                        <option value="{{ $item->nama_perangkat }}"
+                                            {{ old('jenis_perangkat', $requestPemeliharaan->jenis_perangkat) == $item->nama_perangkat ? 'selected' : '' }}>
+                                            {{ $item->nama_perangkat }} / {{ $item->jenis_perangkat }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
                         </select>
                     </div>
 
@@ -670,7 +697,7 @@
 
                     <!-- Buttons -->
                     <div class="button-group full-width">
-                        <a href="{{ route('request.pemeliharaan') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('riwayat') }}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary">Update Data</button>
                     </div>
                 </div>
