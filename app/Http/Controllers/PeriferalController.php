@@ -42,7 +42,7 @@ class PeriferalController extends Controller
 
         Periferal::create($data);
 
-        return redirect()->route('riwayat')
+        return redirect()->route('riwayat.periferal')
             ->with('success', 'Data periferal berhasil disimpan');
     }
 
@@ -88,7 +88,7 @@ class PeriferalController extends Controller
 
         $periferal->update($data);
 
-        return redirect()->route('riwayat')
+        return redirect()->route('riwayat.periferal')
             ->with('success', 'Data periferal berhasil diperbarui');
     }
 

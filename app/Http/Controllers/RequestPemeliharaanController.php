@@ -108,7 +108,7 @@ class RequestPemeliharaanController extends Controller
         return view('pages.detailpemeliharaan', compact('pemeliharaan'));
     }
 
-    // ========== METHOD BARU: RIWAYAT PERANGKAT ==========
+    // ========== METHOD RIWAYAT PERANGKAT (DENGAN PAGINATION & SEARCH) ==========
     public function riwayatPerangkat($id)
     {
         // Cek apakah ID ada di tabel perangkat utama
@@ -126,12 +126,43 @@ class RequestPemeliharaanController extends Controller
             return redirect()->route('riwayat')->with('error', 'Perangkat tidak ditemukan');
         }
         
-        // Ambil riwayat pemeliharaan berdasarkan nama perangkat
-        $riwayatPemeliharaan = RequestPemeliharaan::where('jenis_perangkat', 'LIKE', '%' . $perangkat->nama_perangkat . '%')
-            ->orderBy('tanggal_aduan', 'desc')
-            ->get();
+        // Ambil parameter 'from' dari request (utama atau periferal)
+        $from = request('from', $jenisPerangkat);
         
-        return view('pages.riwayat-perangkat', compact('perangkat', 'riwayatPemeliharaan', 'jenisPerangkat'));
+        // Query riwayat pemeliharaan berdasarkan nama perangkat
+        $query = RequestPemeliharaan::where('jenis_perangkat', 'LIKE', '%' . $perangkat->nama_perangkat . '%');
+        
+        // Tambahkan filter search jika ada
+        if (request()->has('search') && request('search') != '') {
+            $search = request('search');
+            $query->where(function($q) use ($search) {
+                $q->where('user_aduan', 'like', '%' . $search . '%')
+                  ->orWhere('kerusakan', 'like', '%' . $search . '%')
+                  ->orWhere('nama_penanganan', 'like', '%' . $search . '%')
+                  ->orWhere('status', 'like', '%' . $search . '%');
+            });
+        }
+        
+        // Ambil data dengan pagination (10 data per halaman)
+        $riwayatPemeliharaan = $query->orderBy('tanggal_aduan', 'desc')->paginate(10);
+        
+        // Hitung statistik untuk card (tanpa filter search)
+        $statusSelesai = RequestPemeliharaan::where('jenis_perangkat', 'LIKE', '%' . $perangkat->nama_perangkat . '%')
+            ->where('status', 'Selesai')
+            ->count();
+            
+        $statusProses = RequestPemeliharaan::where('jenis_perangkat', 'LIKE', '%' . $perangkat->nama_perangkat . '%')
+            ->where('status', '!=', 'Selesai')
+            ->count();
+        
+        return view('pages.riwayat-perangkat', compact(
+            'perangkat', 
+            'riwayatPemeliharaan', 
+            'jenisPerangkat',
+            'statusSelesai',
+            'statusProses',
+            'from'
+        ));
     }
 
 }

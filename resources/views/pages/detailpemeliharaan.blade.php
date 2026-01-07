@@ -225,15 +225,15 @@
         </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="mt-4 d-flex gap-3">
-        <a href="{{ route('riwayat') }}" class="btn btn-light-custom px-4 py-3">
-            <i class="bi bi-arrow-left-circle me-2"></i>Kembali
-        </a>
-        <a href="{{ route('requestpemeliharaan.edit', $pemeliharaan->id) }}" class="btn btn-primary-custom px-4 py-3">
-            <i class="bi bi-pencil-square me-2"></i>Edit Pemeliharaan
-        </a>
-    </div>
+    {{-- GANTI BAGIAN TOMBOL KEMBALI INI --}}
+<div class="mt-4 d-flex gap-3">
+    <a href="javascript:history.back()" class="btn btn-light-custom px-4 py-3">
+        <i class="bi bi-arrow-left-circle me-2"></i>Kembali
+    </a>
+    <a href="{{ route('requestpemeliharaan.edit', $pemeliharaan->id) }}" class="btn btn-primary-custom px-4 py-3">
+        <i class="bi bi-pencil-square me-2"></i>Edit Pemeliharaan
+    </a>
+</div>
 </div>
 
 <style>

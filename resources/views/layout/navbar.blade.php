@@ -234,7 +234,7 @@
 
     <!-- MENU KANAN -->
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto me-3">
+      <ul class="navbar-nav ms-auto me-5">
 
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Beranda</a>
@@ -254,8 +254,18 @@
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('riwayat') }}">Riwayat</a>
+        <!-- DROPDOWN RIWAYAT -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" 
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Riwayat
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('riwayat.perangkat-utama') }}">Riwayat Perangkat Utama</a></li>
+            <li><a class="dropdown-item" href="{{ route('riwayat.periferal') }}">Riwayat Periferal</a></li>
+            <li><a class="dropdown-item" href="{{ route('riwayat.pemeliharaan') }}">Riwayat Pemeliharaan</a></li>
+          </ul>
         </li>
         <nav class="navbar navbar-light bg-light">
   

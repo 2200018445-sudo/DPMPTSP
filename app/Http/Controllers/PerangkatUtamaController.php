@@ -62,7 +62,7 @@ class PerangkatUtamaController extends Controller
         ]);
 
         return redirect()
-            ->route('riwayat')
+            ->route('riwayat.perangkat-utama')
             ->with('success', 'Data perangkat utama berhasil disimpan');
     }
 
@@ -123,7 +123,7 @@ class PerangkatUtamaController extends Controller
     ]);
 
     return redirect()
-        ->route('riwayat')
+        ->route('riwayat.perangkat-utama')
         ->with('success', 'Data perangkat berhasil diperbarui');
 }
 

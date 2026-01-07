@@ -695,11 +695,18 @@
                                   placeholder="Jelaskan tindakan yang dilakukan untuk menangani masalah...">{{ old('tindakan', $requestPemeliharaan->tindakan) }}</textarea>
                     </div>
 
-                    <!-- Buttons -->
                     <div class="button-group full-width">
-                        <a href="{{ route('riwayat') }}" class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Update Data</button>
-                    </div>
+    @php
+        $backRoute = match(request()->query('from', 'pemeliharaan')) {
+            'utama' => route('riwayat.perangkat-utama'),
+            'periferal' => route('riwayat.periferal'),
+            'pemeliharaan' => route('riwayat.pemeliharaan'),
+            default => url()->previous()
+        };
+    @endphp
+    <a href="{{ $backRoute }}" class="btn btn-secondary">Kembali</a>
+    <button type="submit" class="btn btn-primary">Update Data</button>
+</div>
                 </div>
             </form>
         </div>

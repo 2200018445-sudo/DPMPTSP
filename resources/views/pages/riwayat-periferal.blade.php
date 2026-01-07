@@ -77,6 +77,64 @@
         filter: brightness(0) invert(1);
     }
 
+    /* ===== SEARCH BOX ===== */
+    .search-container {
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .search-box {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 48px 14px 20px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #e2e8f0;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .search-box input::placeholder {
+        color: #94a3b8;
+    }
+
+    .search-box input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    }
+
+    .search-box button {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 8px 16px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-box button:hover {
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
     /* ===== CARD ===== */
     .card {
         background: rgba(255, 255, 255, 0.05);
@@ -100,14 +158,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-    }
-
-    .card:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .card:nth-child(3) {
-        animation-delay: 0.2s;
     }
 
     .card-header {
@@ -135,7 +185,7 @@
     }
 
     .card-body {
-        padding: 0;
+        padding: 32px;
     }
 
     /* ===== TABLE ===== */
@@ -183,6 +233,101 @@
         box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
     }
 
+    /* ===== PAGINATION ===== */
+    .pagination-container {
+        padding: 24px 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .pagination-info {
+        color: #94a3b8;
+        font-size: 14px;
+        font-weight: 500;
+        order: 2;
+    }
+
+    .pagination {
+        margin: 0;
+        gap: 0;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 6px;
+        overflow: hidden;
+        background: white;
+        border: 1px solid #d1d5db;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        order: 1;
+    }
+
+    .pagination .page-item {
+        margin: 0;
+    }
+
+    .pagination .page-link {
+        background: white;
+        border: none;
+        border-right: 1px solid #e5e7eb;
+        color: #6b7280;
+        padding: 10px 16px;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        margin: 0;
+        min-width: 40px;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pagination .page-item:first-child .page-link {
+        border-radius: 6px 0 0 6px;
+    }
+
+    .pagination .page-item:last-child .page-link {
+        border-right: none;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .pagination .page-link:hover:not(.disabled) {
+        background: #f3f4f6;
+        color: #374151;
+    }
+
+    .pagination .page-item.active .page-link {
+        background: #1d4ed8;
+        color: white;
+        border-color: #1d4ed8;
+        position: relative;
+        z-index: 1;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        background: white;
+        color: #d1d5db;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .pagination .page-item.disabled .page-link:hover {
+        background: white;
+        color: #d1d5db;
+    }
+
+    /* Styling khusus untuk arrow */
+    .pagination .page-link[rel="prev"],
+    .pagination .page-link[rel="next"] {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
     /* ===== BADGES ===== */
     .badge {
         font-size: 12px;
@@ -193,30 +338,9 @@
         text-transform: uppercase;
     }
 
-    .bg-success {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .bg-danger {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-    }
-
-    .bg-warning {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        color: #ffffff !important;
-    }
-
     .bg-dark {
         background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
         box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3);
-    }
-
-    .bg-primary {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
     }
 
     /* ===== BUTTONS ===== */
@@ -265,6 +389,18 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
         background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    }
+
+    .btn-warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-warning:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5);
+        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
     }
 
     /* ===== MODAL ===== */
@@ -329,7 +465,6 @@
         font-size: 13px;
     }
 
-    /* Button Close Modal */
     .btn-close {
         filter: brightness(0) invert(1);
         opacity: 1;
@@ -344,13 +479,6 @@
     /* ===== TEXT COLORS ===== */
     .text-muted {
         color: #64748b !important;
-    }
-
-    /* ===== EMPTY STATE ===== */
-    .table tbody tr td.text-center.text-muted {
-        padding: 60px 20px;
-        font-size: 16px;
-        font-weight: 600;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -382,12 +510,13 @@
             flex-direction: column;
         }
 
-        .modal-body {
-            padding: 24px;
+        .search-box {
+            max-width: 100%;
         }
 
-        .modal-footer {
-            padding: 20px 24px;
+        .pagination-container {
+            flex-direction: column;
+            gap: 16px;
         }
     }
 </style>
@@ -403,80 +532,6 @@
             </div>
         @endif
 
-        {{-- ===================== --}}
-        {{-- TABEL PERANGKAT UTAMA --}}
-        {{-- ===================== --}}
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-white fw-bold">
-                Riwayat Perangkat Utama
-            </div>
-
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-bordered border-primary">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Nama Perangkat</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                                <th style="text-align:center; vertical-align:middle;">Aksi</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @forelse ($perangkatUtamas as $item)
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama_perangkat }}</td>
-                                    <td>{{ $item->jenis_perangkat }}</td>
-                                    
-                                    
-                
-                                    <td class="text-center">
-                                        <span class="badge {{ $item->status === 'OK' ? 'bg-success' : 'bg-danger' }}">
-                                            {{ $item->status }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $item->keterangan ?? '-' }}</td>
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center gap-2">
-                                            {{-- Pemeliharaan --}}
-                                            <a href="{{ route('perangkat.riwayat', $item->id) }}" class="btn btn-warning">
-    <i class="bi bi-tools me-1"></i>PEMELIHARAAN
-</a>
-                                            <a href="{{ route('perangkatutama.edit', $item->id) }}"
-                                               class="btn btn-secondary btn-sm">
-                                                Edit
-                                            </a>
-                                            <button type="button"
-                                                    class="btn btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#hapusModal{{ $item->id }}">
-                                                Hapus
-                                            </button>
-                                            <a href="{{ route('perangkatutama.show', $item->id) }}"
-                                                    class="btn btn-primary btn-sm">
-                                                Detail
-                                             </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center text-muted py-4">
-                                        Data perangkat utama belum tersedia
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
         {{-- ================= --}}
         {{-- TABEL PERIFERAL --}}
         {{-- ================= --}}
@@ -485,7 +540,20 @@
                 Riwayat Perangkat Periferal
             </div>
 
-            <div class="card-body p-0">
+            <div class="card-body">
+                {{-- SEARCH BOX --}}
+                <form action="{{ route('riwayat.periferal') }}" method="GET">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" 
+                                   name="search" 
+                                   placeholder="🔍 Cari ID, nama, tipe, posisi, pengguna..." 
+                                   value="{{ request('search') }}">
+                            <button type="submit">Cari</button>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table table-bordered border-primary">
                         <thead>
@@ -493,27 +561,22 @@
                                 <th>No</th>
                                 <th>ID</th>
                                 <th>Nama Perangkat</th>
-                                
-                                <th>Tipe</th>
                                 <th>Posisi</th>
                                 <th>Pengguna</th>
                                 <th style="text-align:center; vertical-align:middle;">Aksi</th>
-
                             </tr>
                         </thead>
 
                         <tbody>
                             @forelse ($periferals as $item)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ ($periferals->currentPage() - 1) * $periferals->perPage() + $loop->iteration }}</td>
                                     <td>{{ $item->id_perangkat }}</td>
                                     <td>
                                         <span class="badge bg-dark">
                                             {{ $item->jenis_perangkat }}
                                         </span>
                                     </td>
-                                    
-                                    <td>{{ $item->tipe }}</td>
                                     <td>{{ $item->posisi }}</td>
                                     <td>{{ $item->pengguna }}</td>
 
@@ -521,9 +584,10 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
                                             {{-- Pemeliharaan --}}
-                                            <a href="{{ route('perangkat.riwayat', $item->id) }}" class="btn btn-warning">
-    <i class="bi bi-tools me-1"></i>PEMELIHARAAN
-</a>
+                                            <a href="{{ route('perangkat.riwayat', ['id' => $item->id, 'from' => 'periferal']) }}" 
+                                               class="btn btn-warning">
+                                                <i class="bi bi-tools me-1"></i>PEMELIHARAAN
+                                            </a>
                                             <a href="{{ route('periferal.edit', $item->id) }}"
                                                class="btn btn-secondary btn-sm">
                                                 Edit
@@ -543,134 +607,77 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center text-muted py-4">
-                                        Data periferal belum tersedia
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        {{-- =============================== --}}
-        {{-- TABEL RIWAYAT REQUEST PEMELIHARAAN --}}
-        {{-- =============================== --}}
-        <div class="card shadow-sm border-0 mt-4">
-            <div class="card-header bg-white fw-bold">
-                Riwayat Pemeliharaan Perangkat
-            </div>
-
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-bordered border-primary">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>User Aduan</th>
-                                <th>Kerusakan</th>
-                                
-                                
-                                <th>Petugas</th>
-                                <th>Tindakan</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @forelse ($requestPemeliharaans as $item)
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user_aduan }}</td>
-                                    <td>{{ $item->kerusakan }}</td>
-                                    
-                                    
-                                    <td>{{ $item->nama_penanganan ?? '-' }}</td>
-                                    <td>{{ $item->tindakan ?? '-' }}</td>
-                                    <td class="text-center">
-                                        <span class="badge {{ $item->status === 'Selesai' ? 'bg-success' : 'bg-warning' }}">
-                                            {{ $item->status }}
-                                        </span>
-                                    </td>
-                                     {{-- AKSI --}}
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center gap-2">
-
-                                            
-                                            <button type="button"
-                                                    class="btn btn-danger btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#hapusPemeliharaan{{ $item->id }}">
-                                                Hapus
-                                            </button>
-
-                                            <a href="{{ route('requestpemeliharaan.show', $item->id) }}"
-                                            class="btn btn-primary btn-sm">
-                                                Detail
-                                            </a>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
                                     <td colspan="7" class="text-center text-muted py-4">
-                                        Data request pemeliharaan belum tersedia
+                                        @if(request('search'))
+                                            Tidak ada data yang sesuai dengan pencarian "{{ request('search') }}"
+                                        @else
+                                            Data periferal belum tersedia
+                                        @endif
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
+
+                
+
+                {{-- PAGINATION --}}
+                @if($periferals->hasPages())
+                <div class="pagination-container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {{-- Previous Button --}}
+                            @if ($periferals->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span class="page-link">‹</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $periferals->previousPageUrl() }}" rel="prev">‹</a>
+                                </li>
+                            @endif
+
+                            {{-- Page Numbers --}}
+                            @foreach ($periferals->getUrlRange(1, $periferals->lastPage()) as $page => $url)
+                                @if ($page == $periferals->currentPage())
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ $page }}</span>
+                                    </li>
+                                @else
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+
+                            {{-- Next Button --}}
+                            @if ($periferals->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $periferals->nextPageUrl() }}" rel="next">›</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">›</span>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                    <div class="pagination-info">
+                        Menampilkan {{ $periferals->firstItem() ?? 0 }} - {{ $periferals->lastItem() ?? 0 }} dari {{ $periferals->total() }} data
+                    </div>
+                </div>
+                @endif
+
+            
             </div>
         </div>
 
     </div>
 </div>
-
-{{-- ========================================= --}}
-{{-- MODAL HAPUS PERANGKAT UTAMA (LUAR TABEL) --}}
-{{-- ========================================= --}}
-@foreach ($perangkatUtamas as $item)
-<div class="modal fade" id="hapusModal{{ $item->id }}" tabindex="-1" aria-labelledby="hapusModalLabel{{ $item->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="hapusModalLabel{{ $item->id }}">
-                    ⚠️ Konfirmasi Hapus
-                </h5>
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p>Apakah Anda yakin ingin menghapus data perangkat utama ini?</p>
-                <strong>{{ $item->nama_perangkat }}</strong>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Batal
-                </button>
-                <form action="{{ route('perangkatutama.destroy', $item->id) }}"
-                      method="POST"
-                      style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        Ya, Hapus
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
 
 {{-- ===================================== --}}
-{{-- MODAL HAPUS PERIFERAL (LUAR TABEL) --}}
+{{-- MODAL HAPUS PERIFERAL --}}
 {{-- ===================================== --}}
 @foreach ($periferals as $item)
 <div class="modal fade" id="hapusPeriferal{{ $item->id }}" tabindex="-1" aria-labelledby="hapusPeriferalLabel{{ $item->id }}" aria-hidden="true">
@@ -699,50 +706,6 @@
                 </button>
 
                 <form action="{{ route('periferal.destroy', $item->id) }}"
-                      method="POST"
-                      style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        Ya, Hapus
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-
-{{-- ========================================== --}}
-{{-- MODAL HAPUS PEMELIHARAAN (LUAR TABEL) --}}
-{{-- ========================================== --}}
-@foreach ($requestPemeliharaans as $item)
-<div class="modal fade" id="hapusPemeliharaan{{ $item->id }}" tabindex="-1" aria-labelledby="hapusPemeliharaanLabel{{ $item->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="hapusPemeliharaanLabel{{ $item->id }}">
-                    ⚠️ Konfirmasi Hapus
-                </h5>
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body text-center">
-                <p>Apakah Anda yakin ingin menghapus data pemeliharaan ini?</p>
-                <strong>{{ $item->kerusakan }}</strong>
-            </div>
-
-            <div class="modal-footer justify-content-center">
-                <button type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal">
-                    Batal
-                </button>
-
-                <form action="{{ route('request.pemeliharaan.destroy', $item->id) }}"
                       method="POST"
                       style="display: inline;">
                     @csrf

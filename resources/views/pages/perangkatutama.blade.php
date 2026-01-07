@@ -559,7 +559,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Tahun Produksi</label>
+                        <label class="form-label">Tahun Perolehan</label>
                         <input type="number" name="tahun_produksi" class="form-control" placeholder="2024">
                     </div>
 

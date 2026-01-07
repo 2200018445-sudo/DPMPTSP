@@ -2,12 +2,22 @@
 
 @section('konten')
 <div class="container py-5">
+    @php
+        // Tentukan route kembali berdasarkan parameter 'from'
+        $backRoute = ($from ?? 'utama') === 'periferal' 
+            ? route('riwayat.periferal') 
+            : route('riwayat.perangkat-utama');
+        $backLabel = ($from ?? 'utama') === 'periferal' 
+            ? 'Riwayat Periferal' 
+            : 'Riwayat Perangkat Utama';
+    @endphp
+    
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb bg-transparent p-0">
             <li class="breadcrumb-item">
-                <a href="{{ route('riwayat') }}" class="text-decoration-none text-primary">
-                    <i class="bi bi-house-door me-1"></i>Riwayat
+                <a href="{{ $backRoute }}" class="text-decoration-none text-primary">
+                    <i class="bi bi-house-door me-1"></i>{{ $backLabel }}
                 </a>
             </li>
             <li class="breadcrumb-item active fw-semibold">Riwayat Pemeliharaan Perangkat</li>
@@ -26,13 +36,13 @@
                             </h2>
                             <p class="text-white-50 mb-0">
                                 <i class="bi bi-info-circle me-1"></i>
-                                Perangkat: <strong>{{ $perangkat->nama_perangkat ?? $perangkat->nama }}</strong>
+                                Perangkat: <strong>{{ $perangkat->nama_perangkat ?? $perangkat->nama ?? 'N/A' }}</strong>
                             </p>
                         </div>
                         <div>
                             <span class="badge badge-info-custom px-4 py-3 fs-6 shadow-sm">
                                 <i class="bi bi-laptop me-2"></i>
-                                {{ ucfirst($jenisPerangkat) }}
+                                {{ $perangkat->jenis_perangkat ?? 'Perangkat' }}
                             </span>
                         </div>
                     </div>
@@ -41,7 +51,7 @@
         </div>
     </div>
 
-    @if($riwayatPemeliharaan->isEmpty())
+    @if($riwayatPemeliharaan->count() == 0 && !request('search'))
         <!-- Belum Ada Riwayat -->
         <div class="row">
             <div class="col-12">
@@ -55,8 +65,8 @@
                             <p class="text-muted mb-4">
                                 Perangkat ini belum pernah dalam pemeliharaan atau belum ada laporan kerusakan yang tercatat.
                             </p>
-                            <a href="{{ route('riwayat') }}" class="btn btn-primary-custom px-4 py-3">
-                                <i class="bi bi-arrow-left-circle me-2"></i>Kembali ke Riwayat
+                            <a href="{{ $backRoute }}" class="btn btn-primary-custom px-4 py-3">
+                                <i class="bi bi-arrow-left-circle me-2"></i>Kembali ke {{ $backLabel }}
                             </a>
                         </div>
                     </div>
@@ -67,17 +77,35 @@
         <!-- Tabel Riwayat -->
         <div class="card border-0 shadow-hover card-modern">
             <div class="card-header bg-transparent border-0 p-4">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-between flex-wrap">
+                    <div class="d-flex align-items-center mb-3 mb-md-0">
                         <div class="icon-box icon-box-primary me-3">
                             <i class="bi bi-list-ul fs-4"></i>
                         </div>
                         <div>
                             <h5 class="fw-bold mb-1">Daftar Riwayat Pemeliharaan</h5>
                             <small class="text-muted">
-                                <i class="bi bi-graph-up me-1"></i>Total {{ $riwayatPemeliharaan->count() }} riwayat pemeliharaan
+                                <i class="bi bi-graph-up me-1"></i>Total {{ $riwayatPemeliharaan->total() }} riwayat pemeliharaan
                             </small>
                         </div>
+                    </div>
+                    
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <form method="GET" action="{{ route('perangkat.riwayat', ['id' => $perangkat->id, 'from' => $from ?? 'utama']) }}">
+                            <div class="position-relative">
+                                <input type="text" 
+                                       name="search" 
+                                       class="form-control" 
+                                       placeholder="🔍 Cari pelapor, kerusakan, petugas..." 
+                                       value="{{ request('search') }}"
+                                       style="min-width: 250px; padding-right: 90px;">
+                                <button type="submit" class="btn btn-primary-custom position-absolute" 
+                                        style="right: 8px; top: 50%; transform: translateY(-50%);">
+                                    Cari
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -97,9 +125,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($riwayatPemeliharaan as $index => $item)
+                            @forelse($riwayatPemeliharaan as $index => $item)
                             <tr>
-                                <td class="text-center fw-semibold">{{ $index + 1 }}</td>
+                                <td class="text-center fw-semibold">{{ $riwayatPemeliharaan->firstItem() + $index }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-calendar-event text-primary me-2"></i>
@@ -162,11 +190,70 @@
                                     </a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="8" class="text-center py-4">
+                                    <div class="empty-search">
+                                        <i class="bi bi-search display-4 text-muted"></i>
+                                        <p class="mt-3 text-muted">Tidak ada data yang ditemukan dengan kata kunci "{{ request('search') }}"</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
+            
+            <!-- Pagination -->
+            @if($riwayatPemeliharaan->hasPages())
+            <div class="card-footer bg-transparent border-0 p-4">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <nav aria-label="Page navigation" class="mb-3">
+                        <ul class="pagination-custom">
+                            {{-- Previous Button --}}
+                            @if ($riwayatPemeliharaan->onFirstPage())
+                                <li class="page-item-custom disabled">
+                                    <span class="page-link-custom">‹</span>
+                                </li>
+                            @else
+                                <li class="page-item-custom">
+                                    <a class="page-link-custom" href="{{ $riwayatPemeliharaan->appends(['search' => request('search'), 'from' => $from ?? 'utama'])->previousPageUrl() }}" rel="prev">‹</a>
+                                </li>
+                            @endif
+
+                            {{-- Page Numbers --}}
+                            @foreach ($riwayatPemeliharaan->getUrlRange(1, $riwayatPemeliharaan->lastPage()) as $page => $url)
+                                @if ($page == $riwayatPemeliharaan->currentPage())
+                                    <li class="page-item-custom active">
+                                        <span class="page-link-custom">{{ $page }}</span>
+                                    </li>
+                                @else
+                                    <li class="page-item-custom">
+                                        <a class="page-link-custom" href="{{ $riwayatPemeliharaan->appends(['search' => request('search'), 'from' => $from ?? 'utama'])->url($page) }}">{{ $page }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+
+                            {{-- Next Button --}}
+                            @if ($riwayatPemeliharaan->hasMorePages())
+                                <li class="page-item-custom">
+                                    <a class="page-link-custom" href="{{ $riwayatPemeliharaan->appends(['search' => request('search'), 'from' => $from ?? 'utama'])->nextPageUrl() }}" rel="next">›</a>
+                                </li>
+                            @else
+                                <li class="page-item-custom disabled">
+                                    <span class="page-link-custom">›</span>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                    <div class="pagination-info-custom">
+                        Menampilkan {{ $riwayatPemeliharaan->firstItem() }} - {{ $riwayatPemeliharaan->lastItem() }} 
+                        dari {{ $riwayatPemeliharaan->total() }} data
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
 
         <!-- Summary Stats -->
@@ -180,7 +267,7 @@
                             </div>
                             <div>
                                 <div class="text-muted small">Total Pemeliharaan</div>
-                                <h3 class="fw-bold mb-0">{{ $riwayatPemeliharaan->count() }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $riwayatPemeliharaan->total() }}</h3>
                             </div>
                         </div>
                     </div>
@@ -195,7 +282,7 @@
                             </div>
                             <div>
                                 <div class="text-muted small">Selesai</div>
-                                <h3 class="fw-bold mb-0">{{ $riwayatPemeliharaan->where('status', 'Selesai')->count() }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $statusSelesai ?? 0 }}</h3>
                             </div>
                         </div>
                     </div>
@@ -210,7 +297,7 @@
                             </div>
                             <div>
                                 <div class="text-muted small">Dalam Proses</div>
-                                <h3 class="fw-bold mb-0">{{ $riwayatPemeliharaan->where('status', '!=', 'Selesai')->count() }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $statusProses ?? 0 }}</h3>
                             </div>
                         </div>
                     </div>
@@ -220,7 +307,7 @@
 
         <!-- Action Button -->
         <div class="mt-4">
-            <a href="{{ route('riwayat') }}" class="btn btn-light-custom px-4 py-3">
+            <a href="{{ $backRoute }}" class="btn btn-light-custom px-4 py-3">
                 <i class="bi bi-arrow-left-circle me-2"></i>Kembali
             </a>
         </div>
@@ -246,6 +333,23 @@
 
     .shadow-hover:hover {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Search Box */
+    .search-box {
+        max-width: 400px;
+    }
+
+    .search-box .form-control {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 14px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .search-box .form-control:focus {
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
     }
 
     /* Icon Box */
@@ -374,6 +478,10 @@
         animation: float 3s ease-in-out infinite;
     }
 
+    .empty-search {
+        padding: 2rem 1rem;
+    }
+
     @keyframes float {
         0%, 100% {
             transform: translateY(0);
@@ -434,6 +542,87 @@
     .btn-primary-custom:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    /* ===== PAGINATION CUSTOM ===== */
+    .pagination-custom {
+        margin: 0;
+        padding: 0;
+        gap: 0;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 6px;
+        overflow: hidden;
+        background: white;
+        border: 1px solid #d1d5db;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        list-style: none;
+    }
+
+    .page-item-custom {
+        margin: 0;
+    }
+
+    .page-link-custom {
+        background: white;
+        border: none;
+        border-right: 1px solid #e5e7eb;
+        color: #6b7280;
+        padding: 10px 16px;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        margin: 0;
+        min-width: 40px;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .page-item-custom:first-child .page-link-custom {
+        border-radius: 6px 0 0 6px;
+    }
+
+    .page-item-custom:last-child .page-link-custom {
+        border-right: none;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .page-link-custom:hover:not(.disabled) {
+        background: #f3f4f6;
+        color: #374151;
+    }
+
+    .page-item-custom.active .page-link-custom {
+        background: #1d4ed8;
+        color: white;
+        border-color: #1d4ed8;
+        position: relative;
+        z-index: 1;
+    }
+
+    .page-item-custom.disabled .page-link-custom {
+        background: white;
+        color: #d1d5db;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .page-item-custom.disabled .page-link-custom:hover {
+        background: white;
+        color: #d1d5db;
+    }
+
+    .pagination-info-custom {
+        color: #6b7280;
+        font-size: 14px;
+        font-weight: 500;
     }
 
     /* Breadcrumb */
@@ -460,6 +649,16 @@
         .stat-icon {
             width: 50px;
             height: 50px;
+        }
+
+        .search-box .form-control {
+            min-width: 200px !important;
+        }
+
+        .btn-detail-custom,
+        .btn-edit-custom {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
         }
     }
 </style>

@@ -66,6 +66,12 @@ Route::put('/requestpemeliharaan/{id}', [RequestPemeliharaanController::class, '
 ===================== */
 Route::get('/riwayat', [RiwayatController::class, 'index'])
     ->name('riwayat');
+Route::get('/riwayat/perangkat-utama', [RiwayatController::class, 'riwayatPerangkatUtama'])
+    ->name('riwayat.perangkat-utama');
+Route::get('/riwayat/periferal', [RiwayatController::class, 'riwayatPeriferal'])
+    ->name('riwayat.periferal');
+Route::get('/riwayat/pemeliharaan', [RiwayatController::class, 'riwayatPemeliharaan'])
+    ->name('riwayat.pemeliharaan');
 
 // Route untuk menampilkan riwayat pemeliharaan berdasarkan perangkat
 Route::get('/perangkat/{id}/riwayat-pemeliharaan', [RequestPemeliharaanController::class, 'riwayatPerangkat'])
