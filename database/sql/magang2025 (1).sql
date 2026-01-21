@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 30, 2025 at 07:51 AM
+-- Generation Time: Jan 08, 2026 at 01:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -146,11 +146,11 @@ CREATE TABLE `perangkat_utamas` (
   `os` varchar(255) NOT NULL,
   `os_status` varchar(255) DEFAULT NULL,
   `ram_merk` varchar(255) NOT NULL,
-  `ram_kapasitas` int(11) NOT NULL,
+  `ram_kapasitas` varchar(10) NOT NULL,
   `ssd_merk` varchar(255) DEFAULT NULL,
-  `ssd_kapasitas` int(11) DEFAULT NULL,
+  `ssd_kapasitas` varchar(10) NOT NULL,
   `hdd_merk` varchar(255) DEFAULT NULL,
-  `hdd_kapasitas` int(11) DEFAULT NULL,
+  `hdd_kapasitas` varchar(10) NOT NULL,
   `office_nama` varchar(255) DEFAULT NULL,
   `office_status` varchar(255) DEFAULT NULL,
   `tahun_produksi` year(4) NOT NULL,
@@ -168,7 +168,10 @@ CREATE TABLE `perangkat_utamas` (
 --
 
 INSERT INTO `perangkat_utamas` (`id`, `nama_perangkat`, `jenis_perangkat`, `id_perangkat`, `os`, `os_status`, `ram_merk`, `ram_kapasitas`, `ssd_merk`, `ssd_kapasitas`, `hdd_merk`, `hdd_kapasitas`, `office_nama`, `office_status`, `tahun_produksi`, `posisi`, `pengguna`, `status`, `keterangan`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 'zein devano', 'PC Standalone', '02216', 'Windows 11', NULL, 'kingston', 256, 'samsung', 1, 'hdd', 2, 'ms office 2016', 'Genuine', '2016', 'sekretariat', 'zein', 'Upgrade', 'ngelag', 'perangkatutama/ttK4WaEcmTQ6Kj1VIIBHbRrsPd4paipdszZ42mrM.png', '2025-12-29 19:16:41', '2025-12-29 19:16:41');
+(1, 'zein devano', 'PC Standalone', '02216', 'Windows 11', NULL, 'kingston', '256 GB', 'samsung', '1 TB', 'hdd', '2 TB', 'ms office 2016', 'Genuine', '2016', 'sekretariat', 'zein', 'OK', 'ya', 'perangkatutama/TceKr0b79xvZaoRL5S287ZmMWJ35QfYOTsjMqTgd.png', '2026-01-05 00:40:34', '2026-01-05 00:47:20'),
+(2, 'B', 'Laptop', '126', 'Windows 11', NULL, 'kingston', '1GB', 'samsung', '!TB', 'dd', '2 GB', 'ms office 2018', 'Genuine', '2019', '126A', 'B', 'OK', 'oke', 'perangkatutama/EXBplAYj8UMxvuIy4Yfc4dgwI2QXgNagaiylqheE.png', '2026-01-06 21:39:07', '2026-01-06 21:39:07'),
+(3, 'B', 'Smartphone', '126', 'Windows 11', NULL, 'kingston', '1GB', 'samsung', '!TB', 'dd', '2 GB', 'ms office 2018', 'Genuine', '2019', '126A', 'B', 'Upgrade', 'ruusak', 'perangkatutama/msq5hthj70dnrbfCdaemRdjPYZiYbr4l5SZXabfC.png', '2026-01-06 21:42:43', '2026-01-06 21:42:43'),
+(4, 'G-10', 'PC Server', '126', 'Windows 11', NULL, 'kingston', '1GB', 'samsung', '!TB', 'dd', '2 GB', 'ms office 2018', 'Genuine', '2019', '126A', 'B', 'Upgrade', 'blm bagus', 'perangkatutama/n6rnXYN2ULLo3wKggVFVpbCM0qS5OZhAxveIWv2w.png', '2026-01-07 00:17:05', '2026-01-07 00:17:05');
 
 -- --------------------------------------------------------
 
@@ -196,7 +199,17 @@ CREATE TABLE `periferals` (
 --
 
 INSERT INTO `periferals` (`id`, `nama_perangkat`, `jenis_perangkat`, `id_perangkat`, `merk`, `tipe`, `posisi`, `pengguna`, `foto`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'budiono', 'Switch-Hub', '0976', 'canon', 'lpb pro', 'tsp 1', 'budiono', 'periferal/5PunLUnhIkzoo3FaFaSy2FlK0VAzgqzjwegNHZoy.png', 'amann12', '2025-12-29 19:17:39', '2025-12-29 19:41:02');
+(2, 'agus', 'Scanner', '1231112', 'canon', 'lbs', 'sekertariat', 'agus', 'periferal/4XCxO8p0eeQjNJwSGOwLoH7tePTaigfPv8IbLF7x.png', 'masih oke', '2026-01-05 23:35:32', '2026-01-05 23:35:32'),
+(3, 'bayu', 'AIO', '1097', 'HP', 'jetski', 'pelayanan', 'udin', 'periferal/WWUUNTviGZOFb6wIAFfI7AZrq05l57FBPcNWlaQA.png', 'lemot', '2026-01-06 00:50:54', '2026-01-06 00:50:54'),
+(4, 'A', 'Printer', '12', 'epson', 'r', '12A', 'udin', 'periferal/RkeGqZboIKIh5xun7LEag81tAuKRnWbbyPnE7scE.png', 'no 3', '2026-01-06 21:35:57', '2026-01-06 21:35:57'),
+(5, 'C', 'Akses Point', '128-A', 'hp', 'pro', '128B', 'santo', 'periferal/WzPrBSegKK6KUuKKAAEbpubZBZtl6X1a7VmNkhEe.png', 'ya masih oke', '2026-01-06 21:41:12', '2026-01-06 23:06:19'),
+(6, 'C', 'Akses Point', '128', 'hp', 'pro', '128B', 'santo', 'periferal/tW6aWbemJ5yD1cWpViefJDPQGNiCVfxr1Lx1uTSN.png', 'ya masih oke', '2026-01-06 21:41:37', '2026-01-06 21:41:37'),
+(7, 'D', 'Switch-Hub', '190', 'HP', 'pro', 'LT 120', 'Bagus', 'periferal/ZfaGYLilaRu47RcS1IQeuSFYsyacAj5JPFiZwhl0.png', 'ke-6', '2026-01-06 23:05:58', '2026-01-06 23:05:58'),
+(8, 'E', 'Modem', '110', 'Epson', 'p', 'Sekertariat', 'budi', 'periferal/O21AS1QDsaxG7JdC82pkEYTfM9pWk3hBTUTpHdyI.png', 'baru01', '2026-01-06 23:07:51', '2026-01-06 23:08:38'),
+(9, 'F', 'Printer', '917', 'HP', 'ca', 'lt 1', 'F', 'periferal/EL4ORM8EZKuKoGhSTtbMtZK19VEJNkP44vPkD1fU.png', 'jsajsaj', '2026-01-06 23:10:37', '2026-01-06 23:10:37'),
+(10, 'G-9', 'Switch-Hub', '543', 'HP', 'prod', 'pelayanan', 'G-9', 'periferal/nP5Grr04HMwVQ4QXoHTNwnVFFP05JSXmlaayrN7O.png', 'bagus', '2026-01-06 23:11:38', '2026-01-06 23:11:38'),
+(11, 'H-1', 'AIO', '998', 'canon', 'proj', 'IT', 'ari', 'periferal/qdT1sZkT7IMWsX9YlljkxD5bHWO8DMAmLKjHrHLb.png', 'b-', '2026-01-06 23:12:57', '2026-01-06 23:12:57'),
+(12, 'I-11', 'Scanner', '134', 'HP', 'Pro', 'LTp', 'busi', 'periferal/ErOles6vF1e8mYmvyKP0HTSAmhwikNzXyGvuFCvq.png', 'ke-11', '2026-01-06 23:13:39', '2026-01-06 23:13:39');
 
 -- --------------------------------------------------------
 
@@ -214,15 +227,27 @@ CREATE TABLE `request_pemeliharaans` (
   `tindakan` text DEFAULT NULL,
   `status` enum('Pending','Selesai') NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `jenis_perangkat` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `request_pemeliharaans`
 --
 
-INSERT INTO `request_pemeliharaans` (`id`, `tanggal_aduan`, `kerusakan`, `user_aduan`, `tanggal_penanganan`, `nama_penanganan`, `tindakan`, `status`, `created_at`, `updated_at`) VALUES
-(1, '2025-12-30', 'rusak mesinnya', 'zein', '2026-01-01', 'agus', 'blm bisa', 'Pending', '2025-12-29 19:18:31', '2025-12-29 19:39:29');
+INSERT INTO `request_pemeliharaans` (`id`, `tanggal_aduan`, `kerusakan`, `user_aduan`, `tanggal_penanganan`, `nama_penanganan`, `tindakan`, `status`, `created_at`, `updated_at`, `jenis_perangkat`) VALUES
+(3, '2026-01-07', 'jaringan hilang', 'zein', '2026-01-16', 'pak budi', 'belum dikerjakan', 'Pending', '2026-01-05 23:33:51', '2026-01-07 00:43:30', 'zein devano'),
+(4, '2026-02-05', 'jaringan hilang semua', 'zein', '2026-02-07', 'pak budi utomo', 'done', 'Selesai', '2026-01-06 00:41:01', '2026-01-06 00:41:01', 'zein devano'),
+(5, '2026-01-06', 'perangkat lemot', 'bayu', '2026-01-07', 'agus', 'done semua', 'Selesai', '2026-01-06 00:52:04', '2026-01-06 00:52:04', 'bayu'),
+(6, '2026-01-07', 'A', 'A', '2026-01-08', 'D', 'Y', 'Pending', '2026-01-06 23:35:28', '2026-01-07 01:21:06', 'zein devano'),
+(7, '2026-01-07', 'R', 'R', NULL, NULL, NULL, 'Pending', '2026-01-06 23:42:30', '2026-01-06 23:42:30', 'zein devano'),
+(8, '2026-01-08', 'y', 'y', NULL, NULL, NULL, 'Pending', '2026-01-06 23:42:54', '2026-01-06 23:42:54', 'zein devano'),
+(9, '2026-01-09', 'k', 'k', NULL, NULL, NULL, 'Pending', '2026-01-06 23:43:23', '2026-01-06 23:43:23', 'zein devano'),
+(10, '2026-01-08', 'p', 'p', NULL, NULL, NULL, 'Pending', '2026-01-06 23:43:57', '2026-01-06 23:43:57', 'zein devano'),
+(11, '2026-01-10', 'Q', 'Q', NULL, NULL, NULL, 'Pending', '2026-01-06 23:44:22', '2026-01-06 23:44:22', 'zein devano'),
+(12, '2026-01-20', 'c', 'C', NULL, NULL, NULL, 'Pending', '2026-01-06 23:44:54', '2026-01-06 23:44:54', 'zein devano'),
+(13, '2026-01-15', 'B', 'B', NULL, NULL, NULL, 'Pending', '2026-01-06 23:45:16', '2026-01-06 23:45:16', 'zein devano'),
+(14, '2026-01-29', 'Hhh', 'H', NULL, NULL, NULL, 'Selesai', '2026-01-06 23:45:37', '2026-01-07 01:04:52', 'zein devano');
 
 -- --------------------------------------------------------
 
@@ -244,8 +269,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('js09fybHPzxSozofmZIdqTDvaALYbxXikFXDJ98f', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTFRkZnE3NDNvQklnYWtROWM2NEthMndVY3V0TTlEaW55N1FYaFJkcSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXJhbmdrYXQtdXRhbWEiO3M6NToicm91dGUiO3M6MTQ6InBlcmFuZ2thdHV0YW1hIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767076868),
-('oLwrMiAuYcZnnegnX23uiXisUk1KGsT6UgBuUmIY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZ05NWE5ZYm83aEFnQlV2Y1FJQjVMMUN1U0xPZmFONm5namVsQm14aiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767068881);
+('VnuGBmJNqhvvqxQtsgBGfVEgydUSEoJuMPj6llno', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN3V2YlhGWVJwSmJWT2VkT0lTNFU2Yks2VG05R2RiMzFFYk1adGs1SyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767774334);
 
 -- --------------------------------------------------------
 
@@ -263,13 +287,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@dpmptsp.bantul.go.id', NULL, '$2y$12$pXPUybB2Tk3GXzJowMGMRuy9TrUm.12NoNHELsKDMrd3DdCmVmsSG', NULL, '2025-12-29 20:48:11', '2025-12-29 20:48:11');
 
 --
 -- Indexes for dumped tables
@@ -378,25 +395,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `perangkat_utamas`
 --
 ALTER TABLE `perangkat_utamas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `periferals`
 --
 ALTER TABLE `periferals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `request_pemeliharaans`
 --
 ALTER TABLE `request_pemeliharaans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
